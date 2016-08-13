@@ -1,0 +1,15 @@
+vim/plugged
+vim/doc
+vim/bin
+vim/plugin
+.netrwhist
+.*
+fish_history
+fish_right_prompt.fish
+fish_prompt.fish
+fish_mode_prompt.fish
+fishd*
+xmonad.errors
+xmonad-x86_64-linux
+fish_read_history
+wallpapers
