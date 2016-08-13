@@ -9,6 +9,14 @@
 
 ## Installation:
 
+For vim/nvim/tmux/fish configs:
+
+    git clone https://github.com/SolitaryCipher/cfg
+
+For window manager configs:
+
+    git clone --recursive https://github.com/SolitaryCipher/cfg
+
 ### Vim / NeoVim
 1. Make sure that the nvim or vim directory exists with vim-plug
 2. Install dependancies for plugins (I forget what they are)
@@ -18,13 +26,13 @@
 
 ### Tmux
 1. Customize tpm plugins, yank command, and status line if needed
-2. Hit Ctrl-Space I to install tpm plugins
+2. Hit `Ctrl-Space I` to install tpm plugins
 
 ### Fish
-1. Clone SolitaryCipher/base16-env to .config/base16-env
+1. Clone www.github.com/SolitaryCipher/base16-env to `$HOME/.config/base16-env`
 
 ### XMonad and WM 
-    See www.github.com/SolitaryCipher/wm
+See www.github.com/SolitaryCipher/wm
 
 ## Dependencies:
 
@@ -38,6 +46,3 @@
 ### Fish
     xsel
     
-## Other Requirements:
-### Fish
-    $HOME/.config/base16-env     # https://github.com/SolitaryCipher/base16-env
