@@ -13,10 +13,6 @@
 
 - investigate vertical bars
 - bar colors mess up sometimes?
-- move to separate git repo
 
 ## Other Todo:
-
-- weechat config? 
-- make new git repo
 

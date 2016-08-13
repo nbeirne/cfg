@@ -1,11 +1,12 @@
 # Config Files
 
 ## File Locations
-        bin/      -> $HOME/.local/bin/
-        fish/     -> $HOME/.config/fish/
-        vim/      -> $HOME/.config/nvim/
-        dircolors -> $HOME/.dircolors
-        tmux.conf -> $HOME/.tmux.conf
+    bin/      -> $HOME/.local/bin/
+    fish/     -> $HOME/.config/fish/
+    vim/      -> $HOME/.config/nvim/
+    dircolors -> $HOME/.dircolors
+    tmux.conf -> $HOME/.tmux.conf
+    weechat/  -> $HOME/.weechat/
 
 ## Installation:
 
@@ -30,6 +31,9 @@ For window manager configs:
 
 ### Fish
 1. Clone www.github.com/SolitaryCipher/base16-env to `$HOME/.config/base16-env`
+
+### Weechat
+1. Copy over private configs ;]
 
 ### XMonad and WM 
 See www.github.com/SolitaryCipher/wm
