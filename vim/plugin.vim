@@ -11,7 +11,8 @@ if exists("use_plugins")
 
   Plug 'mhinz/vim-grepper'
   Plug 'tpope/vim-unimpaired'
-  "Plug 'kien/ctrlp.vim'
+  Plug 'kien/ctrlp.vim'
+  Plug 'yssl/QFEnter'
 
   "Plug 'chriskempson/base16-vim'
   Plug 'NLKNguyen/papercolor-theme'
@@ -34,6 +35,10 @@ if exists("use_plugins")
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'critiqjo/lldb.nvim'
     Plug 'Rip-Rip/clang_complete'
+
+  " language specific plugins
+    Plug 'eagletmt/neco-ghc'
+    Plug 'neovimhaskell/haskell-vim'
   else
     " VIM specific plugins
     Plug 'Shougo/neocomplete'
@@ -91,8 +96,8 @@ if exists("use_plugins")
   "autocmd FileType objc let g:clang_library_path='/Developer/usr/clang-ide/lib'
 
   " colors
-  set background=light
 	"let base16colorspace=256  " Access colors present in 256 colorspace
+  set background=light
   colorscheme PaperColor
 
   " ag config
@@ -107,10 +112,6 @@ if exists("use_plugins")
     \   'escape': ''
     \ }}
 
-  " ctrlp 
-  "let g:ctrlp_show_hidden = 1
-  "let g:ctrlp_extensions = ['smarttabs']
-
   " markdown
   let g:vim_markdown_math = 1
 
@@ -120,8 +121,8 @@ if exists("use_plugins")
   xmap gs  <plug>(GrepperOperator)
   if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor\ -S
-    "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    "let g:ctlrp_use_caching = 0
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctlrp_use_caching = 0
 
     nnoremap <Leader>/ :Grepper -tool ag -highlight<CR>
     nnoremap <Leader>* :Grepper -tool ag -cword -noprompt -highlight<CR>
@@ -133,10 +134,10 @@ if exists("use_plugins")
   nmap <Leader>tt :NERDTreeToggle<CR>
 
   " CTRL P bindings
-  "nmap <Leader>ff :CtrlP<CR>
-  "nmap <Leader>fb :CtrlPBuffer<CR>
-  "nmap <Leader>fr :CtrlPMRU<CR>
-  "nmap <Leader>fq :CtrlPQuickfix<CR>
+  nmap <Leader>ff :CtrlP<CR>
+  nmap <Leader>fb :CtrlPBuffer<CR>
+  nmap <Leader>fr :CtrlPMRU<CR>
+  nmap <Leader>fq :CtrlPQuickfix<CR>
 
   " Vim iOS
   nmap <Leader>fm :ListMethods<CR>

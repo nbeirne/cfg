@@ -4,17 +4,17 @@
 
 ## Environment
 if test -d $HOME/.local/bin
-  set -gx PATH $HOME/.local/bin/ $PATH
+  set -gx PATH $HOME/.local/bin/ $HOME/.cabal/bin/ $PATH
 end
 
 # Vim 
 if type -q nvim
     set -gx EDITOR nvim
-    #alias vim 'nvim'
-    #alias vi 'nvim'
+    alias vim 'nvim'
+    alias vi 'nvim'
 else if type -q vim
     set -gx EDITOR vim
-    #alias vi 'vim'
+    alias vi 'vim'
 else
     echo "Missing nvim and vim"
 end
