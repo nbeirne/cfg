@@ -164,6 +164,7 @@
 
     augroup qf
       autocmd FileType qf set nobuflisted
+      autocmd FileType qf set norelativenumber
       autocmd FileType qf nmap <buffer> <UP> :cprev<CR>:copen<CR>
       autocmd FileType qf nmap <buffer> <DOWN> :cnext<CR>:copen<CR>
     augroup END
