@@ -22,11 +22,12 @@
   set showcmd                     " Shows the input from an incomplete command
 
   set nowrap                      " do not wrap text in editor
+  set linebreak                   " break on words when wrap is on
   set listchars=eol:¬,extends:…,precedes:…,tab:▸\ 
   set colorcolumn=81      " show a line at the 81st column
-  set cursorline          " highlight the current line
-  set relativenumber      " relative number to the current column
-  set number              " except for the current column
+  "set cursorline          " highlight the current line
+  set number              " line numbers
+  "set relativenumber      " relative number to the current column
   "set list                " end of line/tab chars 
 " }}}
 
@@ -41,6 +42,7 @@
 " }}}
 
 " == search and quickfix == {{{
+  set path=.,,,**     " path for :find 
   set incsearch       " show matches as you type
   set hlsearch        " highlight search terms
   set ignorecase      " ignore case
@@ -81,8 +83,9 @@
 
 " == status and title == {{{
   set laststatus=2    " always show status line
-  set ruler           " always show columns/lines in status bar
+  set ruler           " always show columns/lines in status 
   set wildmenu        " allow status line completions (files, commands, etc)
+  set wildignorecase  " ignore case in tab complete
   "set completeopt=menuone,longest,preview " show a menu when autocompleting
 
   set statusline=%<\ %n:%f\ 
@@ -111,8 +114,8 @@
 
   " == Copy and Paste == {{{
     " These can potentially be overriden by platform specific settings
-    imap <C-v> <ESC>"+Pa
-    vmap <C-v> c<ESC>"+P
+    imap <C-v> <ESC>"+pa
+    vmap <C-v> c<ESC>"+p
     vmap <C-c> "+yi
     vmap <C-x> "+c
   " }}}
@@ -145,6 +148,15 @@
     nmap <Leader>bd :bd<CR>
     nmap <Leader>bl :bl<CR>
     nmap <Leader>bn :bn<CR>
+    " bs goes to last buffer
+    nmap <BS> <C-^>
+    " list buffers
+  " }}}
+
+  " == Finding Stuff " {{{
+  "  set path=.,/usr/include,,**
+    nnoremap <Leader>fb :ls<CR>:b 
+    nnoremap <Leader>ff :find 
   " }}}
 
   " == Search == {{{
@@ -165,8 +177,15 @@
     augroup qf
       autocmd FileType qf set nobuflisted
       autocmd FileType qf set norelativenumber
-      autocmd FileType qf nmap <buffer> <UP> :cprev<CR>:copen<CR>
-      autocmd FileType qf nmap <buffer> <DOWN> :cnext<CR>:copen<CR>
+      autocmd FileType qf set wrap
+      "autocmd FileType qf nmap <buffer> <UP> :cprev<CR>:copen<CR>
+      "autocmd FileType qf nmap <buffer> <DOWN> :cnext<CR>:copen<CR>
+      autocmd FileType qf nmap <buffer> <UP> <UP><CR><C-w><C-p> 
+      autocmd FileType qf nmap <buffer> <DOWN> <DOWN><CR><C-w><C-p> 
+      autocmd FileType qf nmap <buffer> q :close<CR>
+    "autocmd WinLeave * set cul
+    "autocmd WinEnter * set nocul
+
     augroup END
   " }}}
 

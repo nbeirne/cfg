@@ -1,4 +1,5 @@
 " todo with plugins: 1. Install ruby
+"
 "                    2. Install python-lldb
 "                    3. Make sure kwbd.vim is in autoload/
 "                    4. Edit Clang paths
@@ -9,44 +10,58 @@
 if exists("use_plugins")
   call plug#begin(g:plugin_path)
 
-  Plug 'mhinz/vim-grepper'
-  Plug 'tpope/vim-unimpaired'
-  Plug 'kien/ctrlp.vim'
-  Plug 'yssl/QFEnter'
+  Plug 'mhinz/vim-grepper'    " better grep
+  Plug 'tpope/vim-unimpaired' " toggles and ]b [b
+  Plug 'yssl/QFEnter'         " quickfix always opens last focused window
+  Plug 'rgarver/Kwbd.vim'     " don't close window on :Kwbd
 
-  "Plug 'chriskempson/base16-vim'
   Plug 'NLKNguyen/papercolor-theme'
-  Plug 'chriskempson/base16-vim'
-  Plug 'tpope/vim-fugitive'
-  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  Plug 'rgarver/Kwbd.vim'
 
-  " language specific plugins
-  "Plug 'SolitaryCipher/vim-markdown'
+  "set t_Co=256
+  "let &t_AB="\e[48;5;%dm"
+  "let &t_AF="\e[38;5;%dm"
 
-  if has("macunix")
-    " macOS Specific Plugins
-    Plug 'msanders/cocoa.vim'
-    Plug 'eraserhd/vim-ios'
-  end
+  " language specific plugins - for completions + syntax checking.
 
   if has("nvim")
     " NVIM specific plugins
+    " completion plugins
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'critiqjo/lldb.nvim'
-    Plug 'Rip-Rip/clang_complete'
+    Plug 'neomake/neomake'           " syntax checker
 
-  " language specific plugins
-    Plug 'eagletmt/neco-ghc'
-    Plug 'neovimhaskell/haskell-vim'
+    " c
+    "Plug 'zchee/deoplete-clang' " completions
+
+    " haskell 
+    Plug 'eagletmt/neco-ghc'         " completions
+    Plug 'neovimhaskell/haskell-vim' " better highlighting + indentation
+    Plug 'eagletmt/ghcmod-vim'       " error checking and type magic.
+    Plug 'Shougo/vimproc.vim', {'do': 'make'}
+ 
   else
     " VIM specific plugins
     Plug 'Shougo/neocomplete'
-    "Plug 'justmao945/vim-clang.git'
   end
 
   call plug#end()
 
+  inoremap <silent><expr><CR>  pumvisible() ? "\<C-y>" : "\<CR>"
+
+  function! s:neosnippet_complete()
+  if pumvisible()
+    return "\<c-n>"
+  else
+    if neosnippet#expandable_or_jumpable() 
+      return "\<Plug>(neosnippet_expand_or_jump)"
+    endif
+    return "\<tab>"
+  endif
+endfunction
+
+imap <expr><TAB> <SID>neosnippet_complete()
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 
   " clang, neocomplete, and deoplete config
   if has("nvim")
@@ -77,6 +92,8 @@ if exists("use_plugins")
     let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
   else
     let g:clang_library_path = '/usr/lib/llvm-3.6/lib/libclang.so.1'
+    let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.6/lib/libclang.so.1'
+    let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.6/lib/clang/3.6.2/include'
   end
 
   let g:clang_complete_auto = 0
@@ -87,16 +104,29 @@ if exists("use_plugins")
   let g:clang_use_library = 1
   let g:clang_snippets = 1
   let g:clang_user_options = '-std=c++11 -stdlib=libc++ -I/usr/local/include'
-  let g:clang_c_options = '-std=c11 -I/usr/local/include'
+  let g:clang_c_options = '-std=c11 -I/usr/local/include -Iinclude/'
   let g:clang_cpp_options = '-std=c++11 -isystem -I/usr/local/include'
   let g:clang_auto_user_options = 'compile_commands.json, .clang_complete, path'
 
-  "let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
-  "autocmd FileType objc let g:clang_use_library=1
-  "autocmd FileType objc let g:clang_library_path='/Developer/usr/clang-ide/lib'
 
-  " colors
-	"let base16colorspace=256  " Access colors present in 256 colorspace
+  " haskell syntax + indentation   
+  let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+  let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+  let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+  let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+  let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+  let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+
+  let g:haskell_indent_if = 2
+  let g:haskell_indent_case = 2
+
+  autocmd! BufWritePost * Neomake
+
+	map <silent> tw :GhcModTypeInsert<CR>
+	map <silent> ts :GhcModSplitFunCase<CR>
+	map <silent> tq :GhcModType<CR>
+	map <silent> te :GhcModTypeClear<CR>
+
   set background=light
   colorscheme PaperColor
 
@@ -112,36 +142,17 @@ if exists("use_plugins")
     \   'escape': ''
     \ }}
 
-  " markdown
-  let g:vim_markdown_math = 1
-
   " == Key Bindings == 
   " search bindings
   nmap gs  <plug>(GrepperOperator)
   xmap gs  <plug>(GrepperOperator)
   if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor\ -S
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
     let g:ctlrp_use_caching = 0
 
     nnoremap <Leader>/ :Grepper -tool ag -highlight<CR>
     nnoremap <Leader>* :Grepper -tool ag -cword -noprompt -highlight<CR>
   endif
-  nmap <Leader>ff :Grepper -tool findf -nohighlight<CR>
-
-
-
-  nmap <Leader>tt :NERDTreeToggle<CR>
-
-  " CTRL P bindings
-  nmap <Leader>ff :CtrlP<CR>
-  nmap <Leader>fb :CtrlPBuffer<CR>
-  nmap <Leader>fr :CtrlPMRU<CR>
-  nmap <Leader>fq :CtrlPQuickfix<CR>
-
-  " Vim iOS
-  nmap <Leader>fm :ListMethods<CR>
-  nmap <Leader>m :ListMethods<CR>
 
   " mapping toggles
   nmap <Leader>t co
