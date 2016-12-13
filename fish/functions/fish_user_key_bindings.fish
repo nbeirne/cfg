@@ -10,8 +10,8 @@ function fish_user_key_bindings
   bind \cd kill-whole-line
 
   # home / end
-  bind -M insert -m default \e\[H beginning-of-line force-repaint
-  bind -M insert -m default \e\[F end-of-line force-repaint
+  bind -k home beginning-of-line force-repaint
+  bind -k end end-of-line force-repaint
 
   # accidental caps :]
   bind :Q exit
