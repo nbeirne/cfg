@@ -3,44 +3,60 @@
 ##
 
 ## Environment
-if test -d $HOME/.local/bin
-  set -gx PATH $HOME/.local/bin/ $HOME/.cabal/bin/ $PATH
+function __set_path
+  if test -d $argv
+    set -gx PATH $argv $PATH
+  end
 end
 
-# Vim 
+__set_path $HOME/.local/bin
+__set_path $HOME/.cabal/bin
+__set_path $HOME/.stack/programs/x86_64-linux/ghc-8.0.1/bin/ 
+
+
 if type -q nvim
     set -gx EDITOR nvim
-    alias vim 'nvim'
-    alias vi 'nvim'
 else if type -q vim
     set -gx EDITOR vim
-    alias vi 'vim'
-else
-    echo "Missing nvim and vim"
+end
+
+if test -z "$SSH_ENV"
+    setenv SSH_ENV $HOME/.ssh/environment
+end
+
+if not __ssh_agent_is_started
+    __ssh_agent_start
 end
 
 ## Aliases
-alias tmuxl 'tmux list-session'
-alias irc 'weechat'
-
-if type -q xdg-open
-  alias open "xdg-open"
+function __set_alias 
+  if type -q $argv[2]
+    alias $argv[1] "$argv[2..-1]"
+  end
 end
 
-if type -q upower
-  alias battery "upower -i '/org/freedesktop/UPower/devices/battery_BAT0'"
-end
+alias :q 'exit'
 
-if not type -q pbcopy 
-    alias pbcopy "xsel --clipboard --input"
-    alias pbpaste "xsel --clipboard --output"
-end
+__set_alias "tmuxl"   tmux list-sessions
+__set_alias "irc"     weechat
+__set_alias "vi"      vim
+__set_alias "vi"      nvim
+__set_alias "vim"     nvim
+__set_alias "open"    xdg-open
+
+__set_alias "battery" upower -i '/org/freedesktop/UPower/devices/battery_BAT0'
+
+__set_alias "pbcopy"  xsel --clipboard --input
+__set_alias "pbpaste" xsel --clipboard --output
+
 
 ## Colors
 if test -d $HOME/.config/base16-env 
   source  $HOME/.config/base16-env/base16-env.fish   # environment
-  eval sh $HOME/.config/base16-env/base16-shell.sh   # term colors
   source  $HOME/.config/base16-env/base16-fish.fish  # fish syntax 
+  #if status --is-interactive
+  #  #eval sh $HOME/.config/base16-env/base16-shell.sh   # term colors
+  #end
 else
   #echo "Run $ git clone www.github.com/SolitaryCipher/base16-env.git ~/.config/base16-env"
 end
