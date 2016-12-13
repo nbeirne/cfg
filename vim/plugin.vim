@@ -15,7 +15,10 @@ if exists("use_plugins")
   Plug 'yssl/QFEnter'         " quickfix always opens last focused window
   Plug 'rgarver/Kwbd.vim'     " don't close window on :Kwbd
 
+  "Plug 'nickburlett/vim-colors-stylus'
+  Plug 'reedes/vim-colors-pencil'
   Plug 'NLKNguyen/papercolor-theme'
+  "Plug 'chriskempson/base16-vim'
 
   "set t_Co=256
   "let &t_AB="\e[48;5;%dm"
@@ -128,6 +131,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 	map <silent> te :GhcModTypeClear<CR>
 
   set background=light
+  let base16colorspace=256
   colorscheme PaperColor
 
   " ag config

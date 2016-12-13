@@ -24,7 +24,7 @@
   set nowrap                      " do not wrap text in editor
   set linebreak                   " break on words when wrap is on
   set listchars=eol:¬,extends:…,precedes:…,tab:▸\ 
-  set colorcolumn=81      " show a line at the 81st column
+  "set colorcolumn=81      " show a line at the 81st column
   "set cursorline          " highlight the current line
   set number              " line numbers
   "set relativenumber      " relative number to the current column
