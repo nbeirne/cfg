@@ -1,0 +1,1 @@
+/media/DATA/configs/cfg/fish/prompt/fish_prompt.fish
