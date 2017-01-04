@@ -112,6 +112,25 @@
   " Explore mode key
   nmap <silent> <Leader>e :Explore<CR>
 
+  " == Editing == {{{
+    " move to start/end of line
+    nnoremap <C-b> ^
+    nnoremap <C-e> $
+    " move by visual line -- don't skip wrapped lines.
+    nnoremap j gj
+    nnoremap k gk
+    
+    " shift moves by increments of 5
+    nmap H 5h
+    xmap H 5h
+    nmap J 5j
+    xmap J 5j
+    nmap K 5k
+    xmap K 5k
+    nmap L 5l
+    xmap L 5l
+  " }}}
+
   " == Copy and Paste == {{{
     " These can potentially be overriden by platform specific settings
     imap <C-v> <ESC>"+pa
@@ -148,6 +167,7 @@
     nmap <Leader>bd :bd<CR>
     nmap <Leader>bl :bl<CR>
     nmap <Leader>bn :bn<CR>
+    nmap <Leader>bp :bp<CR>
     " bs goes to last buffer
     nmap <BS> <C-^>
     " list buffers

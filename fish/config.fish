@@ -9,8 +9,8 @@ function __set_path
   end
 end
 
-__set_path $HOME/.local/bin
-__set_path $HOME/.cabal/bin
+__set_path $HOME/.local/bin/
+__set_path $HOME/.stack/bin/
 __set_path $HOME/.stack/programs/x86_64-linux/ghc-8.0.1/bin/ 
 
 
@@ -37,7 +37,10 @@ end
 
 alias :q 'exit'
 
+alias "ls"      "ls -h --color --group-directories-first"
+__set_alias "urxvt"   urxvt256c
 __set_alias "tmuxl"   tmux list-sessions
+__set_alias "tm"      tmuxa
 __set_alias "irc"     weechat
 __set_alias "vi"      vim
 __set_alias "vi"      nvim
