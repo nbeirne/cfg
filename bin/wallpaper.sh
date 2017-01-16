@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 #WALLPAPER_DIR=~/.wallpapers/
-WALLPAPER_DIR=~/.xmonad/wallpapers/
+WALLPAPER_DIR=~/.wallpapers/
 FEH_ARGS="--no-fehbg --bg-fill"
 
 if [[ -n $@ ]] && [[ -f $1 ]]; then
