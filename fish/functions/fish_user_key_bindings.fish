@@ -16,3 +16,4 @@ function fish_user_key_bindings
   # accidental caps :]
   bind :Q exit
 end
+

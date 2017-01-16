@@ -5,7 +5,8 @@ function unarchive
             switch $argv
                 case '*.tar.bz2';   tar xvjf $argv
                 case '*.tar.gz';    tar xvzf $argv
-                case 'tar.xz';      tar xvfJ $argv
+                case '*.deb';       ar vx $argv
+                case '*.tar.xz';    tar xvfJ $argv
                 case '*.bz2';       bunzip2 $argv
                 case '*.rar';       unrar x $argv
                 case '*.gz';        gunzip $argv
