@@ -60,8 +60,9 @@ if exists("use_plugins")
 
     " debuggers
     "Plug  'joonty/vdebug'
-    Plug 'hsanson/vim-android'
-    Plug 'idanarye/vim-vebugger'
+    "Plug 'hsanson/vim-android'
+    "Plug 'idanarye/vim-vebugger'
+    "Plug 'kevinbrandon/vim-vebugger'
     "Plug 'vim-scripts/yavdb'
 
   call plug#end()
