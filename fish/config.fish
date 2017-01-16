@@ -12,7 +12,10 @@ end
 __set_path $HOME/.local/bin/
 __set_path $HOME/.stack/bin/
 __set_path $HOME/.stack/programs/x86_64-linux/ghc-8.0.1/bin/ 
+__set_path $HOME/.local/share/android-studio/bin/
+__set_path $HOME/.local/share/android-studio/gradle/gradle-2.14.1/bin/
 
+. ~/.cargo/env
 
 if type -q nvim
     set -gx EDITOR nvim
@@ -43,8 +46,10 @@ __set_alias "tmuxl"   tmux list-sessions
 __set_alias "tm"      tmuxa
 __set_alias "irc"     weechat
 __set_alias "vi"      vim
-__set_alias "vi"      nvim
-__set_alias "vim"     nvim
+#__set_alias "vi"      nvim
+#__set_alias "vim"     nvim
+__set_alias "vi"      vimx
+__set_alias "vim"     vimx
 __set_alias "open"    xdg-open
 
 __set_alias "battery" upower -i '/org/freedesktop/UPower/devices/battery_BAT0'
