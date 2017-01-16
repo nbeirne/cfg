@@ -1,167 +1,172 @@
 " todo with plugins: 1. Install ruby
-"
-"                    2. Install python-lldb
-"                    3. Make sure kwbd.vim is in autoload/
-"                    4. Edit Clang paths
-"                    5. :PlugInstall
-"                    6. In clang_complete: make install
+" Programs Used:
+" - jslint
+" - jshint
+" - tern
+" - clang
+" - ghcmod
 
 
 if exists("use_plugins")
   call plug#begin(g:plugin_path)
 
-  Plug 'mhinz/vim-grepper'    " better grep
-  Plug 'tpope/vim-unimpaired' " toggles and ]b [b
-  Plug 'yssl/QFEnter'         " quickfix always opens last focused window
-  Plug 'rgarver/Kwbd.vim'     " don't close window on :Kwbd
+    Plug 'mhinz/vim-grepper'            " searching (faster than base.vim version)
+    Plug 'tpope/vim-unimpaired'         " toggles and ][ commands
+    Plug 'yssl/QFEnter'                 " quickfix always opens last focused window
+    Plug 'rgarver/Kwbd.vim'             " don't close window on :Kwbd
 
-  "Plug 'nickburlett/vim-colors-stylus'
-  Plug 'reedes/vim-colors-pencil'
-  Plug 'NLKNguyen/papercolor-theme'
-  "Plug 'chriskempson/base16-vim'
+    " colors
+    Plug 'NLKNguyen/papercolor-theme'   " The best colorscheme.
 
-  "set t_Co=256
-  "let &t_AB="\e[48;5;%dm"
-  "let &t_AF="\e[38;5;%dm"
+    " IDE-like features (none are strictly required).
+    Plug 'ervandew/supertab'            " contextual tab complete
+    Plug 'vim-syntastic/syntastic'      " syntax checker
+    Plug 'ludovicchabant/vim-gutentags' " auto generate tags
+    Plug 'ctrlpvim/ctrlp.vim'           " searching
+    Plug 'majutsushi/tagbar',           { 'on': 'TagbarToggle'    }
+    Plug 'scrooloose/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'airblade/vim-gitgutter',      { 'on': 'GitGutterToggle' }
 
-  " language specific plugins - for completions + syntax checking.
+    " language specific plugins
+    Plug 'sheerun/vim-polyglot'         " syntax + indentation for a lot of languages.
 
-  if has("nvim")
-    " NVIM specific plugins
-    " completion plugins
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'neomake/neomake'           " syntax checker
+    " omni completions
+    Plug 'justmao945/vim-clang'
+    Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+    Plug 'ternjs/tern_for_vim',           { 'for': 'javascript', 'do': 'npm install' }
+    Plug 'eagletmt/neco-ghc',             { 'for': 'haskell' }
+    "Plug 'davidhalter/jedi-vim',          { 'for': 'python'  }
 
-    " c
-    "Plug 'zchee/deoplete-clang' " completions
+    " haskell magic
+    Plug 'Shougo/vimproc.vim',   { 'do': 'make'     } " used in ghcmod-vim
+    Plug 'eagletmt/ghcmod-vim',  { 'for': 'haskell' } " error checking and type magic.
 
-    " haskell 
-    Plug 'eagletmt/neco-ghc'         " completions
-    Plug 'neovimhaskell/haskell-vim' " better highlighting + indentation
-    Plug 'eagletmt/ghcmod-vim'       " error checking and type magic.
-    Plug 'Shougo/vimproc.vim', {'do': 'make'}
- 
-  else
-    " VIM specific plugins
-    Plug 'Shougo/neocomplete'
-  end
+    " testing
+    "Plug 'jiangmiao/auto-pairs'
+    "Plug 'Rip-Rip/clang_complete'
+    "Plug 'msanders/cocoa.vim'             " completions for objc 
+
+    "Plug 'vim-scripts/L9'
+    "Plug 'vim-scripts/FuzzyFinder'
+    "Plug 'junegunn/fzf'
+    "Plug 'junegunn/fzf.vim'
+
+    "Plug 'Shougo/Unite.vim'      " replace ctrlp
+    "Plug 'Shougo/vimfiler.vim'   " does not have git status (replace nerdtree)
+    "Plug 'Shougo/unite-outline'  " replace tagbar
+    "Plug 'Shougo/neoinclude.vim'  " replace tagbar(2)
+    "Plug 'tsukkee/unite-tag'     " part of ctrlp (tag search)
+
+    " debuggers
+    "Plug  'joonty/vdebug'
+    Plug 'hsanson/vim-android'
+    Plug 'idanarye/vim-vebugger'
+    "Plug 'vim-scripts/yavdb'
 
   call plug#end()
 
-  inoremap <silent><expr><CR>  pumvisible() ? "\<C-y>" : "\<CR>"
+  " filetypes and such
+    autocmd FileType java set omnifunc=javacomplete#Complete
+    autocmd FileType c set omnifunc=ClangComplete
+    autocmd FileType objc set omnifunc=ClangComplete
+    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+  
+  " ghc
+    let g:necoghc_enable_detailed_browse = 1
 
-  function! s:neosnippet_complete()
-  if pumvisible()
-    return "\<c-n>"
-  else
-    if neosnippet#expandable_or_jumpable() 
-      return "\<Plug>(neosnippet_expand_or_jump)"
+  " vim-clang
+    let g:clang_auto = 1
+    let g:clang_c_completeopt = 'menuone,preview'
+    let g:clang_cpp_completeopt = 'menuone,preview'
+    let g:clang_verbose_pmenu = 1
+
+  " vim-android
+    let g:gradle_path = "/home/nick/.local/share/android-studio/gradle/gradle-2.14.1/bin/gradle"
+    let g:android_sdk_path = "/home/nick/.android/sdk/"
+
+  " supertab 
+    set completeopt=longest,menuone,preview,noinsert
+    let g:SuperTabDefaultCompletionType = "context"
+    let g:SuperTabContextDefaultCompletionType = "<c-p>"
+    let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+    let g:SuperTabContextDiscoverDiscovery = ["&omnifunc:<c-x><c-o>"]
+    let g:SuperTabCrMapping = 1
+    autocmd FileType * 
+          \if &omnifunc != '' |
+          \call SuperTabChain(&omnifunc, "<c-p>") |
+          \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+          \endif
+
+  " syntastic 
+    set statusline^=%*
+    set statusline^=%{SyntasticStatuslineFlag()}
+    set statusline^=%#warningmsg#
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 0
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_java_javac_classpath = "~/.android/sdk/platforms/android-25/*.jar"
+    let g:syntastic_java_javac_config_file_enabled = 1
+    let g:syntastic_check_on_open = 1
+
+
+  " ag config
+    let g:grepper = {
+      \ 'tools': ['ag', 'git', 'findf'],
+      \ 'open':  1,
+      \ 'jump':  0,
+      \ 'highlight': '1',
+      \ 'findf': {
+      \   'grepprg': 'find . -iregex ".*$*.*" | sed -e "s/\.\///g"',
+      \   'grepformat': '%f',
+      \   'escape': ''
+      \ }}
+    nnoremap <Leader>/ :Grepper -tool ag -highlight<CR> 
+    nnoremap <Leader>* :Grepper -tool ag -highlight -noprompt -cword<CR> 
+
+
+  "ctrlp 
+    "set tags=./.git/tags
+    if executable('ag')
+      let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore node_modules --ignore .git'
+      let g:ctlrp_use_caching = 0
     endif
-    return "\<tab>"
-  endif
-endfunction
 
-imap <expr><TAB> <SID>neosnippet_complete()
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-  " clang, neocomplete, and deoplete config
-  if has("nvim")
-    call deoplete#enable()
-
-    inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ deoplete#mappings#manual_complete()
-      function! s:check_back_space() abort
-        let col = col('.') - 1
-        return !col || getline('.')[col - 1]  =~ '\s'
-      endfunction
-  else
-    let g:neocomplete#enable_at_startup = 1
-
-    inoremap <silent><expr><TAB>  
-              \ pumvisible() ? "\<C-n>" :
-              \ <SID>check_back_space() ? "\<TAB>" :
-              \ neocomplete#start_manual_complete()
-      function! s:check_back_space() "{{{
-        let col = col('.') - 1
-        return !col || getline('.')[col - 1]  =~ '\s'
-      endfunction
-  end
-
-  if has("macunix")
-    let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-  else
-    let g:clang_library_path = '/usr/lib/llvm-3.6/lib/libclang.so.1'
-    let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.6/lib/libclang.so.1'
-    let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.6/lib/clang/3.6.2/include'
-  end
-
-  let g:clang_complete_auto = 0
-  let g:clang_auto_select = 0
-  let g:clang_omnicppcomplete_compliance = 0
-  let g:clang_make_default_keymappings = 0
-  let g:clang_verbose_pmenu = 1
-  let g:clang_use_library = 1
-  let g:clang_snippets = 1
-  let g:clang_user_options = '-std=c++11 -stdlib=libc++ -I/usr/local/include'
-  let g:clang_c_options = '-std=c11 -I/usr/local/include -Iinclude/'
-  let g:clang_cpp_options = '-std=c++11 -isystem -I/usr/local/include'
-  let g:clang_auto_user_options = 'compile_commands.json, .clang_complete, path'
+  " NERDTree
+    " close when its the last window
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    let g:NERDTreeDirArrowExpandable = '▶'
+    let g:NERDTreeDirArrowCollapsible = '▼'
 
 
-  " haskell syntax + indentation   
-  let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-  let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-  let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-  let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-  let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-  let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+  " == Key Bindings == {{{
+    " mapping toggles
+    nmap <Leader>t co
+    nmap <Leader>tt :TagbarToggle<CR>
+    nmap <Leader>tf :NERDTreeToggle<CR>
+    nmap <Leader>tg :GitGutterToggle<CR>
 
-  let g:haskell_indent_if = 2
-  let g:haskell_indent_case = 2
+    " CtrlP
+    nmap <Leader>ff :CtrlP<CR>
+    nmap <Leader>fb :CtrlPBuffer<CR>
+    nmap <Leader>ft :CtrlPTag<CR>
 
-  autocmd! BufWritePost * Neomake
+    " Kwbd binding
+    nmap <Leader>bd :Kwbd<CR>
 
-	map <silent> tw :GhcModTypeInsert<CR>
-	map <silent> ts :GhcModSplitFunCase<CR>
-	map <silent> tq :GhcModType<CR>
-	map <silent> te :GhcModTypeClear<CR>
+    " haskell binding 
+    map <silent> tw :GhcModTypeInsert<CR>
+    map <silent> ts :GhcModSplitFunCase<CR>
+    map <silent> tq :GhcModType<CR>
+    map <silent> te :GhcModTypeClear<CR>
+  " }}}
 
+  " colorscheme
   set background=light
   let base16colorspace=256
   colorscheme PaperColor
 
-  " ag config
-  let g:grepper = { 
-    \ 'tools': ['ag', 'git', 'findf'],
-    \ 'open':  1,
-    \ 'jump':  0,
-    \ 'highlight': '1',
-    \ 'findf': {
-    \   'grepprg': 'find . -iregex ".*$*.*" | sed -e "s/\.\///g"',
-    \   'grepformat': '%f',
-    \   'escape': ''
-    \ }}
-
-  " == Key Bindings == 
-  " search bindings
-  nmap gs  <plug>(GrepperOperator)
-  xmap gs  <plug>(GrepperOperator)
-  if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    let g:ctlrp_use_caching = 0
-
-    nnoremap <Leader>/ :Grepper -tool ag -highlight<CR>
-    nnoremap <Leader>* :Grepper -tool ag -cword -noprompt -highlight<CR>
-  endif
-
-  " mapping toggles
-  nmap <Leader>t co
-
-  " Kwbd binding
-  nmap <Leader>bd :Kwbd<CR>
 end
 

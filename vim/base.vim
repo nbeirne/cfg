@@ -13,11 +13,16 @@
   "set autoread                    " When a file changes out of vim, read it again 
   "" remove whitespace on write
   "autocmd BufWritePre * %s/\s\+$//e
+
+  set isfname+=32                 " file name completion fixes (space, brackets)
+  set isfname+=(
+  set isfname+=)
+  set textwidth=0                 " no auto newline
 " }}}
 
 " == visual settings == {{{
   syntax on                       " syntax highlighting
-  set showmatch                   " show matching parenthesis
+  set noshowmatch                 " don't jump to matching paren
   set showmode                    " shows the current mode
   set showcmd                     " Shows the input from an incomplete command
 
@@ -55,7 +60,7 @@
   aug END
 
   if executable('ag') " when we have ag, use it.
-    set grepprg=ag\ --nogroup\ --nocolor\ -S
+    set grepprg=ag\ --nogroup\ --nocolor\ -S\ --ignore\ node_modules\ --ignore\ .git\ --ignore\ tags
   end
 " }}}
 
@@ -64,7 +69,6 @@
   set nowritebackup   " push saves to the original file, as opposed to saving 
                       " to a new file then renaming it.
   " set noswapfile     " removes the 'swap' file (*.*.swp) 
-  "
 " }}}
 
 " == scrolling ==  {{{
@@ -86,6 +90,14 @@
   set ruler           " always show columns/lines in status 
   set wildmenu        " allow status line completions (files, commands, etc)
   set wildignorecase  " ignore case in tab complete
+
+  set wildignore+=**/node_modules/*
+  set wildignore+=**/.git/*
+  set wildignore+=**/*.o
+  set wildignore+=**/*.obj
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+  set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
   "set completeopt=menuone,longest,preview " show a menu when autocompleting
 
   set statusline=%<\ %n:%f\ 
@@ -113,22 +125,26 @@
   nmap <silent> <Leader>e :Explore<CR>
 
   " == Editing == {{{
+    inoremap kj <ESC>
+    inoremap jj <ESC>
+
     " move to start/end of line
     nnoremap <C-b> ^
+    nnoremap <C-i> ^
     nnoremap <C-e> $
     " move by visual line -- don't skip wrapped lines.
     nnoremap j gj
     nnoremap k gk
     
     " shift moves by increments of 5
-    nmap H 5h
-    xmap H 5h
-    nmap J 5j
-    xmap J 5j
-    nmap K 5k
-    xmap K 5k
-    nmap L 5l
-    xmap L 5l
+    "nmap H 5h
+    "xmap H 5h
+    "nmap J 5j
+    "xmap J 5j
+    "nmap K 5k
+    "xmap K 5k
+    "nmap L 5l
+    "xmap L 5l
   " }}}
 
   " == Copy and Paste == {{{
@@ -164,7 +180,7 @@
 
   " == Buffers == {{{
     " map buffer operations to leader. Yay spacemacs!
-    nmap <Leader>bd :bd<CR>
+    nmap <Leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
     nmap <Leader>bl :bl<CR>
     nmap <Leader>bn :bn<CR>
     nmap <Leader>bp :bp<CR>
@@ -180,9 +196,20 @@
   " }}}
 
   " == Search == {{{
-    nnoremap <Leader>/ :grep<SPACE>
-    nnoremap <Leader>* :grep "<cword>"<CR>
-    "nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+    function! Query(str)
+      let query = substitute(a:str, "'", "\\\\'", 'g') 
+      let query = substitute(s, "_", "\\\\_", 'g') 
+      exec "silent grep! '".query."'"
+      copen
+      let @/ = query
+      call histadd('search', query)
+      set hls
+      redraw!
+    endfunction
+
+    command! -nargs=+ NewGrep silent execute Query(<q-args>)
+    nnoremap <Leader>/ :NewGrep<SPACE>
+    nnoremap <Leader>* :NewGrep <cword><CR>
 
     " maps control-/ to clear the current search
     if maparg('<C-_>', 'n') ==# ''
@@ -209,6 +236,14 @@
     augroup END
   " }}}
 
+  " == Completion == {{{
+    set completeopt=longest,menuone,preview
+    "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    "inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+    "inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+  " }}}
+
   " == Folds == {{{
     " zo - open
     " zc - close
@@ -217,9 +252,15 @@
   " }}}
 " }}}
 
+" == Language Helpers {{{
+  command! SortCSSBraceContents :g#\({\n\)\@<=#.,/}/sort
+  nmap <Leader><Leader>css :SortCSSBraceContents<CR>
+" }}}
+
 " == Colorscheme == {{{
   colorscheme ron
 " }}}
+
 set modelines=1
 " vim:foldmethod=marker:foldlevel=0
 

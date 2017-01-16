@@ -16,7 +16,7 @@ if has("nvim")
   let g:load_path   = "~/.config/nvim/"
 else
   let g:plugin_path = "~/.vim/plugged/"
-  let g:load_path   = "~/.config/nvim"
+  let g:load_path   = "~/.config/nvim/"
 endif
 
 exec "so " . g:load_path . "/base.vim"
