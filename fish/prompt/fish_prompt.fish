@@ -20,8 +20,6 @@ set -g symbol_horizontal_bar "—"
 
 set -g color_red (set_color red)
 set -g color_green (set_color green)
-set -g color_blue (set_color blue)
-set -g color_blue "\e[0;34m" #(set_color blue)
 set -g color_yellow (set_color yellow)
 set -g color_cyan (set_color cyan)
 set -g color_gray (set_color 545454)
@@ -32,7 +30,7 @@ set -g color_bold_green (set_color -o green)
 set -g color_bold_magenta (set_color -o magenta)
 
 # magic numbers
-set LOCAL_ESCAPES 90
+#set LOCAL_ESCAPES 90
 
 # Helper functions
 function __parse_git_branch -d "Parse current Git branch name"
@@ -40,12 +38,11 @@ function __parse_git_branch -d "Parse current Git branch name"
     or command git show-ref --head -s --abbrev | head -n1 ^/dev/null
 end
 
-function __fish_format_full_time
-  set -l prompt_date (date +"%H:%M")
-  echo -e "$prompt_date "
+function __prompt_time
+  echo -e (date +"%H$color_yellow:$color_normal%M")
 end
 
-function prompt_git
+function __prompt_git
   set -l is_git_repository (command git rev-parse --is-inside-work-tree ^/dev/null)
 
   if test -n "$is_git_repository"
@@ -81,11 +78,10 @@ function prompt_git
 
     # Format Git prompt output
   end
-  set prompt "$color_gray$git_branch_name$git_dirty$color_normal$color_cyan$git_arrow_space$git_arrows$color_normal "
-  echo -e $prompt
+  echo -e "$color_gray$git_branch_name$git_dirty$color_normal$color_cyan$git_arrow_space$git_arrows$color_normal "
 end
 
-function prompt_mode
+function __prompt_mode
   switch $fish_bind_mode
     case default
       set mode $color_bold_red"n"
@@ -97,26 +93,17 @@ function prompt_mode
       set mode $color_bold_magenta"v"
   end
 
-  set prompt "[$mode$color_normal] "
-  echo -e $prompt
+  echo -e "[$mode$color_normal]"
 end
 
-function prompt_folder
-  set -l current_folder (echo $PWD | sed "s|$HOME|~|")
-  set -l current_folder (echo $argv[1] $current_folder | awk -f $HOME/.config/fish/prompt/pwd.awk)
-  set prompt $prompt "$color_cyan$current_folder$color_normal "
-  echo -e $prompt
-end
 
-function prompt_add_folder
-  set -l prompt_r $argv[1] 
-  set -l prompt_l $argv[2] 
+function __prompt_folder
+  set -l len (printf "%s" "$argv" | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | wc -m)
+  set -l maxlen (echo $COLUMNS - $len | bc) 
 
-  set -l len (printf "%s" $prompt_r $prompt_l | wc -m)
-  set -l len (echo "$len - $LOCAL_ESCAPES" | bc)
-  set -l len (echo $COLUMNS - $len - 5| bc) 
-
-  echo -e $prompt_r(prompt_folder $len)$prompt_l
+  set -l current_folder (~/.config/fish/prompt/short_pwd $maxlen)
+  
+  echo -e $color_cyan$current_folder$color_normal
 end
 
 function fish_prompt
@@ -129,23 +116,21 @@ function fish_prompt
 
   # Set default color symbol to green meaning it's all good!
   #set -l color_symbol $color_green
-  set -l prompt_time
 
-  # Handle previous failed command
   if test $exit_code -ne 0
     # Symbol color is red when previous command fails
     set color_symbol $color_bold_red
-
-    # Prompt failed command execution duration
   end
-  set prompt_time (__fish_format_full_time)
 
+  set -l prompt_time   (__prompt_time)
+  set -l prompt_git    (__prompt_git)
+  set -l prompt_cwd    (__prompt_folder "$prompt_time $prompt_git")
+  set -l prompt_mode   (__prompt_mode)
   set -l prompt_symbol "$color_symbol$symbol_prompt$color_normal"
 
-  # top-right of the prompt, then add folder to top-left, then add mode+symbol
-  set -l prompt (printf "%s" $prompt_time (prompt_git))
-  set prompt (prompt_add_folder "$prompt_time" (prompt_git)) "\n"
-  set prompt \n $prompt (prompt_mode) $prompt_symbol " "
+  set -l prompt "\n"
+  set -l prompt "$prompt$prompt_time $prompt_cwd $prompt_git\n"
+  set -l prompt "$prompt$prompt_mode $prompt_symbol "
 
   echo -e -s $prompt
 end

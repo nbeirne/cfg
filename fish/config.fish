@@ -39,7 +39,6 @@ function __set_alias
 end
 
 alias :q 'exit'
-
 alias "ls"      "ls -h --color --group-directories-first"
 __set_alias "urxvt"   urxvt256c
 __set_alias "tmuxl"   tmux list-sessions
