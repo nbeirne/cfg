@@ -1,0 +1,52 @@
+
+
+__prompt_command() {
+  status="$?"
+  PS1=""
+
+  YELLOW="\[\e[33m\]"
+  CYAN="\[\e[36m\]"
+  RED="\[\e[31m\]"
+  RESET="\[\e[39m\]"
+
+  __exists () {
+    type $1 &> /dev/null ;
+  }
+
+  __str_len() {
+    echo $(echo -e "$@" | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | wc -m)
+  }
+
+  __pwd() {
+    if __exists short_pwd
+    then
+      short_pwd $(expr $COLUMNS - $(__str_len $@) - 5)
+    else
+      echo "\w"
+    fi
+  }
+
+  prompt_time=$(date +"%H$YELLOW:$RESET%M")
+  prompt_git=""  # ... hard.
+  prompt_mode="" # can't set vi mode :(
+  prompt_cwd="$CYAN$(__pwd $prompt_time)$RESET"
+  prompt_symbol="$"
+
+  if [ $status -ne 0 ] 
+  then 
+    prompt_symbol="$RED$prompt_symbol$RESET"
+  fi
+
+  PS1="\n$prompt_time $prompt_cwd $prompt_git\n$prompt_symbol$RESET "
+
+  # cleanup
+  unset __pwd
+  unset __str_len
+  unset YELLOW
+  unset CYAN
+  unset RED
+  unset RESET
+}
+
+PROMPT_COMMAND+="__prompt_command;"
+
