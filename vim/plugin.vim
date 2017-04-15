@@ -20,13 +20,12 @@ if exists("use_plugins")
 
     " IDE-like features (none are strictly required).
     Plug 'ervandew/supertab'            " contextual tab complete
-    Plug 'vim-syntastic/syntastic'      " syntax checker
+    "Plug 'vim-syntastic/syntastic'      " syntax checker
     Plug 'ludovicchabant/vim-gutentags' " auto generate tags
     Plug 'ctrlpvim/ctrlp.vim'           " searching
     Plug 'majutsushi/tagbar',           { 'on': 'TagbarToggle'    }
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'airblade/vim-gitgutter',      { 'on': 'GitGutterToggle' }
 
     " language specific plugins
     Plug 'sheerun/vim-polyglot'         " syntax + indentation for a lot of languages.
@@ -43,15 +42,20 @@ if exists("use_plugins")
     Plug 'eagletmt/ghcmod-vim',  { 'for': 'haskell' } " error checking and type magic.
 
     " testing
+    "Plug 'vim-scripts/tagexplorer.vim'
+    "Plug 'yazug/vim-taglist-plus'
+    "Plug 'tpope/vim-fugitive'
+    "Plug 'airblade/vim-gitgutter',      { 'on': 'GitGutterToggle' }
     "Plug 'jiangmiao/auto-pairs'
     "Plug 'Rip-Rip/clang_complete'
     "Plug 'msanders/cocoa.vim'             " completions for objc 
-
+  
     "Plug 'vim-scripts/L9'
     "Plug 'vim-scripts/FuzzyFinder'
     "Plug 'junegunn/fzf'
     "Plug 'junegunn/fzf.vim'
 
+    " Unite testing
     "Plug 'Shougo/Unite.vim'      " replace ctrlp
     "Plug 'Shougo/vimfiler.vim'   " does not have git status (replace nerdtree)
     "Plug 'Shougo/unite-outline'  " replace tagbar
@@ -59,6 +63,7 @@ if exists("use_plugins")
     "Plug 'tsukkee/unite-tag'     " part of ctrlp (tag search)
 
     " debuggers
+    "Plug 'gilligan/vim-lldb'
     "Plug  'joonty/vdebug'
     "Plug 'hsanson/vim-android'
     "Plug 'idanarye/vim-vebugger'
@@ -66,6 +71,7 @@ if exists("use_plugins")
     "Plug 'vim-scripts/yavdb'
 
   call plug#end()
+    let g:Tlist_Display_Prototype = 1
 
   " filetypes and such
     autocmd FileType java set omnifunc=javacomplete#Complete
@@ -78,7 +84,7 @@ if exists("use_plugins")
     let g:necoghc_enable_detailed_browse = 1
 
   " vim-clang
-    let g:clang_auto = 1
+    let g:clang_auto = 0
     let g:clang_c_completeopt = 'menuone,preview'
     let g:clang_cpp_completeopt = 'menuone,preview'
     let g:clang_verbose_pmenu = 1
@@ -101,9 +107,9 @@ if exists("use_plugins")
           \endif
 
   " syntastic 
-    set statusline^=%*
-    set statusline^=%{SyntasticStatuslineFlag()}
-    set statusline^=%#warningmsg#
+    "set statusline^=%*
+    "set statusline^=%{SyntasticStatuslineFlag()}
+    "set statusline^=%#warningmsg#
 
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 0
