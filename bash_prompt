@@ -1,4 +1,34 @@
+#!/bin/bash
 
+__prompt_git_info() {
+  __git_branch_name() {
+    ref=$(git symbolic-ref --short HEAD 2> /dev/null) || return
+    echo $ref
+  }
+
+  __git_is_dirty() { # "" on no changes, content if changes
+    echo $(git status --porcelain 2>/dev/null)
+  }
+
+  __git_has_upstream() { # returns "x y" where x is # of commits ahead, y is # of commits in origin
+    echo $(git rev-list --left-right --count 'HEAD...@{upstream}' 2>/dev/null)
+  }
+
+  local DIRTY_CHAR=$GRAY
+  if [[ "$(__git_is_dirty)" != "" ]]
+  then
+    DIRTY_CHAR="$YELLOW*"
+  fi
+
+  local changes=$(__git_has_upstream | cut -d" " -f1)
+  local UP_CH=""
+  if [[  changes -gt 0 ]]
+  then
+    UP_CH="(+)"
+  fi
+
+  echo "$DIRTY_CHAR$(__git_branch_name)$UP_CH"
+}
 
 __prompt_command() {
   status="$?"
@@ -27,7 +57,7 @@ __prompt_command() {
   }
 
   prompt_time=$(date +"%H$YELLOW:$RESET%M")
-  prompt_git=""  # ... hard.
+  prompt_git="$(__prompt_git_info)"  # ... hard.
   prompt_mode="" # can't set vi mode :(
   prompt_cwd="$CYAN$(__pwd $prompt_time)$RESET"
   prompt_symbol="$"
@@ -37,7 +67,7 @@ __prompt_command() {
     prompt_symbol="$RED$prompt_symbol$RESET"
   fi
 
-  PS1="\n$prompt_time $prompt_cwd $prompt_git\n$prompt_symbol$RESET "
+  PS1="\n$prompt_time $prompt_cwd $prompt_git$RESET\n$prompt_symbol$RESET "
 
   # cleanup
   unset __pwd

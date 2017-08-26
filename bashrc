@@ -25,7 +25,6 @@ __set_alias() {
     cmd="${@:2}"
     alias $1="$cmd"
   fi
-
 }
 
 if test -f ~/.dircolors; then 
