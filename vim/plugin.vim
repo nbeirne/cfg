@@ -20,55 +20,27 @@ if exists("use_plugins")
 
     " IDE-like features (none are strictly required).
     Plug 'ervandew/supertab'            " contextual tab complete
-    "Plug 'vim-syntastic/syntastic'      " syntax checker
-    Plug 'ludovicchabant/vim-gutentags' " auto generate tags
+    "Plug 'ludovicchabant/vim-gutentags' " auto generate tags
     Plug 'ctrlpvim/ctrlp.vim'           " searching
     Plug 'majutsushi/tagbar',           { 'on': 'TagbarToggle'    }
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'https://github.com/w0rp/ale'
 
     " language specific plugins
     Plug 'sheerun/vim-polyglot'         " syntax + indentation for a lot of languages.
 
     " omni completions
-    Plug 'justmao945/vim-clang'
-    Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-    Plug 'ternjs/tern_for_vim',           { 'for': 'javascript', 'do': 'npm install' }
-    Plug 'eagletmt/neco-ghc',             { 'for': 'haskell' }
+    "Plug 'justmao945/vim-clang'
+    "Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+    "Plug 'ternjs/tern_for_vim',           { 'for': 'javascript', 'do': 'npm install' }
+    "Plug 'eagletmt/neco-ghc',             { 'for': 'haskell' }
+    "Plug 'OmniSharp/omnisharp-vim'
     "Plug 'davidhalter/jedi-vim',          { 'for': 'python'  }
 
     " haskell magic
-    Plug 'Shougo/vimproc.vim',   { 'do': 'make'     } " used in ghcmod-vim
-    Plug 'eagletmt/ghcmod-vim',  { 'for': 'haskell' } " error checking and type magic.
-
-    " testing
-    "Plug 'vim-scripts/tagexplorer.vim'
-    "Plug 'yazug/vim-taglist-plus'
-    "Plug 'tpope/vim-fugitive'
-    "Plug 'airblade/vim-gitgutter',      { 'on': 'GitGutterToggle' }
-    "Plug 'jiangmiao/auto-pairs'
-    "Plug 'Rip-Rip/clang_complete'
-    "Plug 'msanders/cocoa.vim'             " completions for objc 
-  
-    "Plug 'vim-scripts/L9'
-    "Plug 'vim-scripts/FuzzyFinder'
-    "Plug 'junegunn/fzf'
-    "Plug 'junegunn/fzf.vim'
-
-    " Unite testing
-    "Plug 'Shougo/Unite.vim'      " replace ctrlp
-    "Plug 'Shougo/vimfiler.vim'   " does not have git status (replace nerdtree)
-    "Plug 'Shougo/unite-outline'  " replace tagbar
-    "Plug 'Shougo/neoinclude.vim'  " replace tagbar(2)
-    "Plug 'tsukkee/unite-tag'     " part of ctrlp (tag search)
-
-    " debuggers
-    "Plug 'gilligan/vim-lldb'
-    "Plug  'joonty/vdebug'
-    "Plug 'hsanson/vim-android'
-    "Plug 'idanarye/vim-vebugger'
-    "Plug 'kevinbrandon/vim-vebugger'
-    "Plug 'vim-scripts/yavdb'
+    "Plug 'Shougo/vimproc.vim',   { 'do': 'make'     } " used in ghcmod-vim
+    "Plug 'eagletmt/ghcmod-vim',  { 'for': 'haskell' } " error checking and type magic.
 
   call plug#end()
     let g:Tlist_Display_Prototype = 1
@@ -107,17 +79,9 @@ if exists("use_plugins")
           \endif
 
   " syntastic 
-    "set statusline^=%*
-    "set statusline^=%{SyntasticStatuslineFlag()}
-    "set statusline^=%#warningmsg#
-
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 0
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_java_javac_classpath = "~/.android/sdk/platforms/android-25/*.jar"
-    let g:syntastic_java_javac_config_file_enabled = 1
-    let g:syntastic_check_on_open = 1
-
+    let g:ale_sign_column_always = 1
+    let g:ale_set_quickfix = 1
+    let g:ale_lint_delay = 500
 
   " ag config
     let g:grepper = {
