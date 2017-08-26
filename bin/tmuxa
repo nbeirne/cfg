@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Usage:
+#   tmuxa             - connect to previous session
+#   tmuxa [existing]  - connect to exising session
+#   tmuxa [new]       - connect to new session
+
+#tmuxa() {
+  last="${!#}"
+  if [ $# -eq 0 ]
+  then
+    echo "tmux new-session -A"
+    tmux attach-session
+  else 
+    echo "tmux new-session -A -s $last"
+    tmux new-session -A -s $last
+  fi
+#}
