@@ -34,6 +34,7 @@ __prompt_command() {
   status="$?"
   PS1=""
 
+  GRAY="\[\e[90m\]"
   YELLOW="\[\e[33m\]"
   CYAN="\[\e[36m\]"
   RED="\[\e[31m\]"
@@ -72,9 +73,11 @@ __prompt_command() {
   # cleanup
   unset __pwd
   unset __str_len
+  
   unset YELLOW
   unset CYAN
   unset RED
+  unset GRAY
   unset RESET
 }
 
