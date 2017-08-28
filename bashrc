@@ -14,6 +14,9 @@ EDITOR=vim
 # ignore CTRL-D
 set -o ignoreeof
 
+# ignore case 
+bind 'set completion-ignore-case on'
+
 __set_path() {
   if [ -d $1 ]; then
     PATH="$1:$PATH"
