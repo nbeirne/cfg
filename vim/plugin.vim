@@ -17,6 +17,7 @@ if exists("use_plugins")
 
     " colors
     Plug 'NLKNguyen/papercolor-theme'   " The best colorscheme.
+    Plug 'rakr/vim-one'
 
     " IDE-like features (none are strictly required).
     Plug 'ervandew/supertab'            " contextual tab complete
@@ -25,6 +26,7 @@ if exists("use_plugins")
     Plug 'majutsushi/tagbar',           { 'on': 'TagbarToggle'    }
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
+
     Plug 'https://github.com/w0rp/ale'
 
     " language specific plugins
@@ -135,9 +137,12 @@ if exists("use_plugins")
   " }}}
 
   " colorscheme
-  set background=light
-  let base16colorspace=256
-  colorscheme PaperColor
+  "colorscheme PaperColor
+  "colorscheme one
 
+  colorscheme one
+  set background=light
+
+  "let g:two_firewatch_italics=1
 end
 
