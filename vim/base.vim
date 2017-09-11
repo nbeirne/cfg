@@ -26,7 +26,7 @@
   set showmode                    " shows the current mode
   set showcmd                     " Shows the input from an incomplete command
 
-  set nowrap                      " do not wrap text in editor
+  set wrap                      " do not wrap text in editor
   set linebreak                   " break on words when wrap is on
   set listchars=eol:¬,extends:…,precedes:…,tab:▸\ 
   "set colorcolumn=81      " show a line at the 81st column
