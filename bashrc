@@ -51,6 +51,7 @@ alias ll="ls -l"
 
 __set_alias "urxvt"   urxvt256c
 __set_alias "tmuxl"   tmux list-sessions
+__set_alias "tml"     tmux list-sessions
 __set_alias "tm"      tmuxa
 __set_alias "irc"     weechat
 __set_alias "vi"      vim
@@ -67,13 +68,10 @@ __set_alias "pbpaste" xsel --clipboard --output
 
 
 __set_path $HOME/.local/bin/
-
 __set_path $HOME/.stack/bin/
 __set_path $HOME/.stack/programs/x86_64-linux/ghc-8.0.1/bin/ 
 __set_path $HOME/.local/share/android-studio/bin/
 __set_path $HOME/.local/share/android-studio/gradle/gradle-2.14.1/bin/
-
-. ~/.bash_prompt
 
 # base16 env
 # tmuxa
