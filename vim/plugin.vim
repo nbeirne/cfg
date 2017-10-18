@@ -11,7 +11,6 @@ if exists("use_plugins")
   call plug#begin(g:plugin_path)
 
     Plug 'mhinz/vim-grepper'            " searching (faster than base.vim version)
-    Plug 'tpope/vim-unimpaired'         " toggles and ][ commands
     Plug 'yssl/QFEnter'                 " quickfix always opens last focused window
     Plug 'rgarver/Kwbd.vim'             " don't close window on :Kwbd
 
@@ -20,29 +19,28 @@ if exists("use_plugins")
     Plug 'rakr/vim-one'
 
     " IDE-like features (none are strictly required).
+		Plug 'junegunn/fzf.vim'
+    Plug 'ctrlpvim/ctrlp.vim'           " popup for buffers/files
     Plug 'ervandew/supertab'            " contextual tab complete
-    "Plug 'ludovicchabant/vim-gutentags' " auto generate tags
-    Plug 'ctrlpvim/ctrlp.vim'           " searching
+    Plug 'w0rp/asdle'                     " syntax errors
     Plug 'majutsushi/tagbar',           { 'on': 'TagbarToggle'    }
-    Plug 'scrooloose/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-
-    Plug 'https://github.com/w0rp/ale'
 
     " language specific plugins
     Plug 'sheerun/vim-polyglot'         " syntax + indentation for a lot of languages.
 
     " omni completions
-    "Plug 'justmao945/vim-clang'
+    Plug 'justmao945/vim-clang'
     "Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-    "Plug 'ternjs/tern_for_vim',           { 'for': 'javascript', 'do': 'npm install' }
-    "Plug 'eagletmt/neco-ghc',             { 'for': 'haskell' }
-    "Plug 'OmniSharp/omnisharp-vim'
+    Plug 'eagletmt/neco-ghc',             { 'for': 'haskell' }
+
+		Plug 'OmniSharp/omnisharp-vim' " unity
+
+		let g:OmniSharp_selector_ui = 'fzf'    " Use fzf.vim
     "Plug 'davidhalter/jedi-vim',          { 'for': 'python'  }
 
     " haskell magic
-    "Plug 'Shougo/vimproc.vim',   { 'do': 'make'     } " used in ghcmod-vim
-    "Plug 'eagletmt/ghcmod-vim',  { 'for': 'haskell' } " error checking and type magic.
+    Plug 'Shougo/vimproc.vim',   { 'do': 'make'     } " used in ghcmod-vim
+    Plug 'eagletmt/ghcmod-vim',  { 'for': 'haskell' } " error checking and type magic.
 
   call plug#end()
     let g:Tlist_Display_Prototype = 1
@@ -107,24 +105,18 @@ if exists("use_plugins")
       let g:ctlrp_use_caching = 0
     endif
 
-  " NERDTree
-    " close when its the last window
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    let g:NERDTreeDirArrowExpandable = '▶'
-    let g:NERDTreeDirArrowCollapsible = '▼'
-
 
   " == Key Bindings == {{{
     " mapping toggles
     nmap <Leader>t co
     nmap <Leader>tt :TagbarToggle<CR>
-    nmap <Leader>tf :NERDTreeToggle<CR>
-    nmap <Leader>tg :GitGutterToggle<CR>
 
     " CtrlP
-    nmap <Leader>ff :CtrlP<CR>
-    nmap <Leader>fb :CtrlPBuffer<CR>
-    nmap <Leader>ft :CtrlPTag<CR>
+    nmap <Leader>ff :Files<CR>
+    nmap <Leader>fb :Buffers<CR>
+    nmap <Leader>ft :Tags<CR>
+    nmap <Leader>fq :CtrlPQuickfix<CR>
+    nmap <Leader>fr :CtrlPMRU<CR>
 
     " Kwbd binding
     nmap <Leader>bd :Kwbd<CR>
@@ -138,11 +130,7 @@ if exists("use_plugins")
 
   " colorscheme
   "colorscheme PaperColor
-  "colorscheme one
-
   colorscheme one
-  set background=light
-
-  "let g:two_firewatch_italics=1
+  set background=dark
 end
 
