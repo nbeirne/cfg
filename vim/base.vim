@@ -31,7 +31,7 @@
   set listchars=eol:¬,extends:…,precedes:…,tab:▸\ 
   "set colorcolumn=81      " show a line at the 81st column
   "set cursorline          " highlight the current line
-  set number              " line numbers
+  set nonumber             " line numbers
   "set relativenumber      " relative number to the current column
   "set list                " end of line/tab chars 
 " }}}
@@ -42,7 +42,7 @@
   set tabstop=2       " a tab is four spaces
   set shiftwidth=2    " number of spaces to use for autoindenting
   set smarttab        " insert tabs at the start of a line according to shiftwidth
-  set expandtab       " insert spaces when tab is presssed
+  "set expandtab       " insert spaces when tab is presssed
   set shiftround      " use multiple of Shiftwidth when indenting with '<' and '>'
 " }}}
 
@@ -86,7 +86,8 @@
 " }}}
 
 " == status and title == {{{
-  set laststatus=2    " always show status line
+  "set laststatus=2    " always show status line
+  set laststatus=1    " only show status line on multiple windows
   set ruler           " always show columns/lines in status 
   set wildmenu        " allow status line completions (files, commands, etc)
   set wildignorecase  " ignore case in tab complete
@@ -106,7 +107,7 @@
   set statusline+=%l\ of\ %L\ 
   set statusline+=(%P)
 
-  set title titlestring=nvim\ \-\ %t
+  set title titlestring=vim\ \-\ %t
 " }}}
 
 " == Keybindings == {{{
@@ -187,6 +188,32 @@
     " bs goes to last buffer
     nmap <BS> <C-^>
     " list buffers
+  " }}}
+
+  " ][ commands {{{
+    " buffers
+    nmap ]b :bn<CR>
+    nmap [b :bp<CR>
+    nmap [B :bfirst<CR>
+    nmap ]B :blast<CR>
+
+    " locations
+    nmap ]l :lnext<CR>
+    nmap [l :lprevious<CR>
+    nmap [L :lfirst<CR>
+    nmap ]L :llast<CR>
+
+    " quickfix
+    nmap ]c :cnext<CR>
+    nmap [c :cprevious<CR>
+    nmap ]C :cfirst<CR>
+    nmap [C :clast<CR>
+
+    " tabs
+    nmap ]t :tnext<CR>
+    nmap [t :tprevious<CR>
+    nmap ]T :tfirst<CR>
+    nmap [T :tlast<CR>
   " }}}
 
   " == Finding Stuff " {{{
