@@ -26,12 +26,12 @@
   set showmode                    " shows the current mode
   set showcmd                     " Shows the input from an incomplete command
 
-  set wrap                      " do not wrap text in editor
+  set nowrap                      " do not wrap text in editor
   set linebreak                   " break on words when wrap is on
   set listchars=eol:¬,extends:…,precedes:…,tab:▸\ 
   "set colorcolumn=81      " show a line at the 81st column
   "set cursorline          " highlight the current line
-  set nonumber             " line numbers
+  set number             " line numbers
   "set relativenumber      " relative number to the current column
   "set list                " end of line/tab chars 
 " }}}
@@ -42,7 +42,7 @@
   set tabstop=2       " a tab is four spaces
   set shiftwidth=2    " number of spaces to use for autoindenting
   set smarttab        " insert tabs at the start of a line according to shiftwidth
-  "set expandtab       " insert spaces when tab is presssed
+  set expandtab       " insert spaces when tab is pressed
   set shiftround      " use multiple of Shiftwidth when indenting with '<' and '>'
 " }}}
 

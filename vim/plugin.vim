@@ -22,7 +22,7 @@ if exists("use_plugins")
 		Plug 'junegunn/fzf.vim'
     Plug 'ctrlpvim/ctrlp.vim'           " popup for buffers/files
     Plug 'ervandew/supertab'            " contextual tab complete
-    Plug 'w0rp/asdle'                     " syntax errors
+    Plug 'w0rp/ale'                     " syntax errors
     Plug 'majutsushi/tagbar',           { 'on': 'TagbarToggle'    }
 
     " language specific plugins
@@ -30,6 +30,7 @@ if exists("use_plugins")
 
     " omni completions
     Plug 'justmao945/vim-clang'
+    Plug 'keith/sourcekittendaemon.vim'
     "Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
     Plug 'eagletmt/neco-ghc',             { 'for': 'haskell' }
 
