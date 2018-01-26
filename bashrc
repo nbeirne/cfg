@@ -1,15 +1,8 @@
 # .bashrc
 
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
-
-# User specific aliases and functions
-EDITOR=vim
 
 # ignore CTRL-D
 set -o ignoreeof
@@ -23,12 +16,23 @@ __set_path() {
   fi
 }
 
+__source_sh() {
+  if [ -f $1 ]; then
+		. $1
+  fi
+}
+
 __set_alias() {
   if type "$2" >/dev/null 2> /dev/null; then
     cmd="${@:2}"
     alias $1="$cmd"
   fi
 }
+
+__source_sh /etc/bashrc
+
+# User specific aliases and functions
+EDITOR=vim
 
 if test -f ~/.dircolors; then 
   eval "$(dircolors -b ~/.dircolors)"
@@ -70,16 +74,20 @@ __set_alias "pbpaste" xsel --clipboard --output
 __set_path $HOME/.local/bin/
 __set_path $HOME/.stack/bin/
 __set_path $HOME/.stack/programs/x86_64-linux/ghc-8.0.1/bin/ 
+__set_path $HOME/.cabal/bin/
 __set_path $HOME/.local/share/android-studio/bin/
 __set_path $HOME/.local/share/android-studio/gradle/gradle-2.14.1/bin/
+__set_path /usr/lib64/openmpi/bin/
 
-# base16 env
 # tmuxa
 # vs
 
-if test -f ~/.bash_prompt; then
-  . ~/.bash_prompt
-fi
+__source_sh $HOME/.config/base16-env/base16-env.sh
+__source_sh $HOME/.config/base16-env/base16-shell.sh
+__source_sh $HOME/.bash_prompt
+
+__source_sh /usr/share/fzf/shell/key-bindings.bash
 
 unset __set_path
 unset __set_alias
+unset __source_sh

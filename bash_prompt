@@ -34,7 +34,7 @@ __prompt_command() {
   status="$?"
   PS1=""
 
-  GRAY="\[\e[90m\]"
+  GRAY="\[\e[94m\]"
   YELLOW="\[\e[33m\]"
   CYAN="\[\e[36m\]"
   RED="\[\e[31m\]"
