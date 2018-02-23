@@ -39,8 +39,8 @@
 " == indentation == {{{
   set autoindent      " always autoindent
   set smartindent     " smart indentation after a new line (ie, {, }, 
-  set tabstop=2       " a tab is four spaces
-  set shiftwidth=2    " number of spaces to use for autoindenting
+  set tabstop=4       " a tab is four spaces
+  set shiftwidth=4    " number of spaces to use for autoindenting
   set smarttab        " insert tabs at the start of a line according to shiftwidth
   set expandtab       " insert spaces when tab is pressed
   set shiftround      " use multiple of Shiftwidth when indenting with '<' and '>'
@@ -136,6 +136,9 @@
     " move by visual line -- don't skip wrapped lines.
     nnoremap j gj
     nnoremap k gk
+    
+    " bind \ to repeat last macro (@@)
+    nnoremap \ @@
     
     " shift moves by increments of 5
     "nmap H 5h

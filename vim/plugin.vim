@@ -19,7 +19,7 @@ if exists("use_plugins")
     Plug 'rakr/vim-one'
 
     " IDE-like features (none are strictly required).
-		Plug 'junegunn/fzf.vim'
+	Plug 'junegunn/fzf.vim'
     Plug 'ctrlpvim/ctrlp.vim'           " popup for buffers/files
     Plug 'ervandew/supertab'            " contextual tab complete
     Plug 'w0rp/ale'                     " syntax errors
@@ -27,6 +27,8 @@ if exists("use_plugins")
 
     " language specific plugins
     Plug 'sheerun/vim-polyglot'         " syntax + indentation for a lot of languages.
+    Plug 'sboehler/jflex-vim'
+    Plug 'vim-scripts/cup.vim'
 
     " omni completions
     Plug 'justmao945/vim-clang'

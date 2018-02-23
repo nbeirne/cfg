@@ -2,4 +2,4 @@
 set number
 set guioptions=am
 
-set guifont=Fira\ Mono\ 12
+set guifont=Fira\ Code\ Regular\ 12
