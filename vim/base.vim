@@ -14,9 +14,9 @@
   "" remove whitespace on write
   "autocmd BufWritePre * %s/\s\+$//e
 
-  set isfname+=32                 " file name completion fixes (space, brackets)
-  set isfname+=(
-  set isfname+=)
+"  set isfname+=32                 " file name completion fixes (space, brackets)
+"  set isfname+=(
+"  set isfname+=)
   set textwidth=0                 " no auto newline
 " }}}
 
@@ -78,10 +78,6 @@
 " }}}
 
 " == folding == {{{
-  set foldmethod=indent   " fold based on indent
-  set foldnestmax=10      " deepest fold is 10 levels
-  set foldlevelstart=99   " start at fold level 10
-  set foldlevel=99        " the higher the more folded regions are open. >1 some folds are closed
   set nofoldenable
 " }}}
 
@@ -126,29 +122,12 @@
   nmap <silent> <Leader>e :Explore<CR>
 
   " == Editing == {{{
-    inoremap kj <ESC>
-    inoremap jj <ESC>
-
-    " move to start/end of line
-    nnoremap <C-b> ^
-    nnoremap <C-i> ^
-    nnoremap <C-e> $
     " move by visual line -- don't skip wrapped lines.
     nnoremap j gj
     nnoremap k gk
     
     " bind \ to repeat last macro (@@)
     nnoremap \ @@
-    
-    " shift moves by increments of 5
-    "nmap H 5h
-    "xmap H 5h
-    "nmap J 5j
-    "xmap J 5j
-    "nmap K 5k
-    "xmap K 5k
-    "nmap L 5l
-    "xmap L 5l
   " }}}
 
   " == Copy and Paste == {{{
@@ -183,63 +162,17 @@
   " }}
 
   " == Buffers == {{{
-    " map buffer operations to leader. Yay spacemacs!
+    " close buffer
     nmap <Leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
-    nmap <Leader>bl :bl<CR>
-    nmap <Leader>bn :bn<CR>
-    nmap <Leader>bp :bp<CR>
     " bs goes to last buffer
     nmap <BS> <C-^>
-    " list buffers
-  " }}}
 
-  " ][ commands {{{
-    " buffers
     nmap ]b :bn<CR>
     nmap [b :bp<CR>
     nmap [B :bfirst<CR>
     nmap ]B :blast<CR>
-
-    " locations
-    nmap ]l :lnext<CR>
-    nmap [l :lprevious<CR>
-    nmap [L :lfirst<CR>
-    nmap ]L :llast<CR>
-
-    " quickfix
-    nmap ]c :cnext<CR>
-    nmap [c :cprevious<CR>
-    nmap ]C :cfirst<CR>
-    nmap [C :clast<CR>
-
-    " tabs
-    nmap ]t :tnext<CR>
-    nmap [t :tprevious<CR>
-    nmap ]T :tfirst<CR>
-    nmap [T :tlast<CR>
   " }}}
 
-  " == Finding Stuff " {{{
-  "  set path=.,/usr/include,,**
-    nnoremap <Leader>fb :ls<CR>:b 
-    nnoremap <Leader>ff :find 
-  " }}}
-
-  " == Search == {{{
-    function! Query(str)
-      let query = substitute(a:str, "'", "\\\\'", 'g') 
-      let query = substitute(s, "_", "\\\\_", 'g') 
-      exec "silent grep! '".query."'"
-      copen
-      let @/ = query
-      call histadd('search', query)
-      set hls
-      redraw!
-    endfunction
-
-    command! -nargs=+ NewGrep silent execute Query(<q-args>)
-    nnoremap <Leader>/ :NewGrep<SPACE>
-    nnoremap <Leader>* :NewGrep <cword><CR>
 
     " maps control-/ to clear the current search
     if maparg('<C-_>', 'n') ==# ''
@@ -260,31 +193,16 @@
       autocmd FileType qf nmap <buffer> <UP> <UP><CR><C-w><C-p> 
       autocmd FileType qf nmap <buffer> <DOWN> <DOWN><CR><C-w><C-p> 
       autocmd FileType qf nmap <buffer> q :close<CR>
-    "autocmd WinLeave * set cul
-    "autocmd WinEnter * set nocul
+      "autocmd WinLeave * set cul
+      "autocmd WinEnter * set nocul
 
     augroup END
   " }}}
 
   " == Completion == {{{
     set completeopt=longest,menuone,preview
-    "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-    "inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-    "inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
   " }}}
 
-  " == Folds == {{{
-    " zo - open
-    " zc - close
-    " zr - reduce fold level
-    " zm - increase fold level
-  " }}}
-" }}}
-
-" == Language Helpers {{{
-  command! SortCSSBraceContents :g#\({\n\)\@<=#.,/}/sort
-  nmap <Leader><Leader>css :SortCSSBraceContents<CR>
 " }}}
 
 " == Colorscheme == {{{
