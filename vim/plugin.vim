@@ -16,10 +16,14 @@ if exists("use_plugins")
 
     " colors
     Plug 'NLKNguyen/papercolor-theme'   " The best colorscheme.
-    Plug 'rakr/vim-one'
+    Plug 'joshdick/onedark.vim'
+    Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
     " IDE-like features (none are strictly required).
-	Plug 'junegunn/fzf.vim'
+	"Plug 'junegunn/fzf.vim', { 'dir': '/opt/homebrew/opt/fzf' }
+     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+     Plug 'junegunn/fzf.vim'
+
     Plug 'ctrlpvim/ctrlp.vim'           " popup for buffers/files
     Plug 'ervandew/supertab'            " contextual tab complete
     Plug 'w0rp/ale'                     " syntax errors
@@ -132,8 +136,9 @@ if exists("use_plugins")
   " }}}
 
   " colorscheme
-  "colorscheme PaperColor
-  colorscheme one
   set background=dark
+  colorscheme challenger_deep
+  "highlight Normal ctermbg=NONE
+  "highlight nonText ctermbg=NONE
 end
 
