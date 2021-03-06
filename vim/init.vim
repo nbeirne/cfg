@@ -28,8 +28,9 @@ exec "so " . g:load_path . "/gvim.vim"
 exec "so " . g:load_path . "/plugin.vim"
 
 if has("nvim")
-" == NVIM Specific Settigngs == {{{
+" == NVIM Specific Settings == {{{
   tnoremap <Esc> <C-\><C-n>
+  set mouse=a
 " }}}
 else
 " == Vim Specific System Settings == {{{

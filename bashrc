@@ -68,8 +68,8 @@ __set_alias "tml"     tmux list-sessions
 __set_alias "tm"      tmuxa
 __set_alias "irc"     weechat
 __set_alias "vi"      vim
-#__set_alias "vi"      nvim
-#__set_alias "vim"     nvim
+__set_alias "vi"      nvim
+__set_alias "vim"     nvim
 __set_alias "vi"      vimx
 __set_alias "vim"     vimx
 __set_alias "open"    xdg-open
@@ -77,6 +77,11 @@ __set_alias "open"    xdg-open
 __set_alias "battery" upower -i /org/freedesktop/UPower/devices/battery_BAT0
 __set_alias "agc"     ag -G '.*\.\(swift\|h\|c\|m\|cpp\|cs\|java\|scala\)$'
 __set_alias "kxc"     killall Xcode
+__set_alias "Gapply"  vim +Gapply
+
+__set_alias "itunes-metadata" bundle exec fastlane deliver --skip_binary_upload --skip_screenshots
+__set_alias "fastlane-deliver" bundle exec fastlane deliver --skip_binary_upload --skip_screenshots
+
 
 #__set_alias "pbcopy"  xsel --clipboard --input
 #__set_alias "pbpaste" xsel --clipboard --output
@@ -97,3 +102,22 @@ unset __source_sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+vim-conflict() {
+  vim $(git diff --name-only | uniq)
+}
+
+vim-git-diff() {
+  vim $(git diff --name-only master | uniq)
+}
+
+export ITUNES_USERNAME="nick@tunnelbear.com"
+
+export ANDROID_HOME=~/Library/Android/sdk
+export ANDROID_SDK_ROOT=~/Library/Android/sdk
+export STUDIO_JDK=/Applications/Android\ Studio.app/Contents/jre/jdk/Contents/Home
+export JDK_HOME=/Applications/Android\ Studio.app/Contents/jre/jdk/Contents/Home
+export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/jdk/Contents/Home
+export STUDIO_GRADLE_JDK=/Applications/Android\ Studio.app/Contents/jre/jdk/Contents/Home
+
+TBEAR_USERNAME="nick@tunnelbear.com"
+TBEAR_PASSWORD="testpassword"

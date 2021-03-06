@@ -14,14 +14,15 @@ if exists("use_plugins")
         Plug 'mhinz/vim-grepper'            " searching (faster than base.vim version)
         Plug 'yssl/QFEnter'                 " quickfix always opens last focused window
         Plug 'rgarver/Kwbd.vim'             " don't close window on :Kwbd
-
-
-    " IDE-like features (none are strictly required).
         Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
         Plug 'junegunn/fzf.vim'
 
+
+    " IDE-like features (none are strictly required).
         Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'    }
         Plug 'tpope/vim-fugitive'           " git tracking
+
+        Plug 'andrewradev/gapply.vim'
 
         " disable supertab/ale for work. They appear to be broken :(
         "Plug 'ervandew/supertab'            " contextual tab complete
@@ -29,6 +30,11 @@ if exists("use_plugins")
 
     " language specific plugins
         Plug 'sheerun/vim-polyglot'         " syntax + indentation for a lot of languages.
+        Plug 'slashmili/alchemist.vim'
+
+        Plug 'chiel92/vim-autoformat'
+
+        "Plug 'timburgess/extempore.vim'
 
     " omni completions
         "Plug 'justmao945/vim-clang'                                " c-like
@@ -62,6 +68,10 @@ if exists("use_plugins")
     nnoremap <Leader>/ :Grepper -tool ag -highlight<CR> 
     nnoremap <Leader>* :Grepper -tool ag -highlight -noprompt -cword<CR> 
 
+  " astyle config
+  let g:formatdef_openvpn_cpp = '"astyle --style=gnu --mode=c -Nxns2 -M120"'
+  let g:formatters_cpp = ['openvpn_cpp']
+
   " == Key Bindings == {{{
     " mapping toggles
         nmap <Leader>t co
@@ -71,7 +81,8 @@ if exists("use_plugins")
         nmap <Leader>ff :Files<CR>
         nmap <Leader>fb :Buffers<CR>
         nmap <Leader>ft :Tags<CR>
-
+ 
+        autocmd FileType fzf tnoremap <buffer> <Esc> <Esc>
 
     " Kwbd binding
         nmap <Leader>bd :Kwbd<CR>
@@ -113,6 +124,32 @@ if exists("use_plugins")
         "let g:ale_set_quickfix = 1
         "let g:ale_lint_delay = 500
 
+    " add a definition for Objective-C to tagbar
+    "let g:tagbar_type_objc = {
+    "  \ 'ctagstype': 'objc',
+    "  \ 'ctagsargs': [
+    "    \ '-f',
+    "    \ '-',
+    "    \ '--excmd=pattern',
+    "    \ '--extra=',
+    "    \ '--format=2',
+    "    \ '--fields=nksaSmt',
+    "    \ '--options=' . expand('~/.vim/objctags'),
+    "    \ '--objc-kinds=-N',
+    "  \ ],
+    "  \ 'sro': ' ',
+    "  \ 'kinds': [
+    "    \ 'c:constant',
+    "    \ 'e:enum',
+    "    \ 't:typedef',
+    "    \ 'i:interface',
+    "    \ 'P:protocol',
+    "    \ 'p:property',
+    "    \ 'I:implementation',
+    "    \ 'M:method',
+    "    \ 'g:pragma',
+    "  \ ],
+    "\ }
 
   " colorscheme
     colorscheme PaperColor

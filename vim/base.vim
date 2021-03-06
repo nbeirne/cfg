@@ -9,9 +9,6 @@
   set fileformats=unix,dos,mac    " be able to read os file formats without issues
   set hidden                      " handles mutliple buffers better
 
-  set isfname+=32                 " file name completion fixes (space, brackets)
-  set isfname+=(
-  set isfname+=)
   set textwidth=0                 " no auto newline
 " }}}
 
@@ -31,16 +28,15 @@
 
 " == indentation == {{{
   set autoindent      " always autoindent
-  set smartindent     " smart indentation after a new line (ie, {, }, 
   set tabstop=2       " a tab is four spaces
   set shiftwidth=2    " number of spaces to use for autoindenting
-  set smarttab        " insert tabs at the start of a line according to shiftwidth
   set expandtab       " insert spaces when tab is pressed
-  set shiftround      " use multiple of Shiftwidth when indenting with '<' and '>'
+  "set smartindent     " smart indentation after a new line (ie, {, }, 
+  "set smarttab        " insert tabs at the start of a line according to shiftwidth
+  "set shiftround      " use multiple of Shiftwidth when indenting with '<' and '>'
 " }}}
 
 " == search and quickfix == {{{
-  set path=.,,,**     " path for :find 
   set incsearch       " show matches as you type
   set hlsearch        " highlight search terms
   set ignorecase      " ignore case
@@ -58,15 +54,15 @@
 " }}}
 
 " == backup and extra files == {{{
-  set nobackup        " don't make backup files
-  set nowritebackup   " push saves to the original file, as opposed to saving 
+  "set nobackup        " don't make backup files
+  "set nowritebackup   " push saves to the original file, as opposed to saving 
                       " to a new file then renaming it.
 " }}}
 
 " == scrolling ==  {{{
-  set scrolloff=4         " start scrolling 8 rows above/below the top/bottom
-  set sidescrolloff=8     " start scrolling 8 cols to the side fo the screen
-  set sidescroll=1        " number of spaces to jump when scrolling to the side
+  "set scrolloff=4         " start scrolling 8 rows above/below the top/bottom
+  "set sidescrolloff=8     " start scrolling 8 cols to the side fo the screen
+  "set sidescroll=1        " number of spaces to jump when scrolling to the side
 " }}}
 
 " == folding == {{{
@@ -113,6 +109,9 @@
     
     " bind \ to repeat last macro (@@)
     nnoremap \ @@
+
+    " bind " "Y to copy the entire file to the clipboard
+    noremap <silent><leader>Y ggvG<C-c>:echo "Buffer copied to clipboard"<CR>
   " }}}
 
   " == Copy and Paste == {{{
@@ -162,14 +161,6 @@
       autocmd FileType qf nmap <buffer> q :close<CR>
     augroup END
   " }}}
-
-
-  " == Folds == {{{
-    " zo - open
-    " zc - close
-    " zr - reduce fold level
-    " zm - increase fold level
-  " }}}
 " }}}
 
 " == Language Helpers {{{
@@ -179,6 +170,17 @@
 
 " == Colorscheme == {{{
   colorscheme ron
+" }}}
+
+" == Editing like ci[seperator] {{{
+  let s:separators = exists('g:loaded_targets') ? [ '`', '%']
+        \ : [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`', '-' ]
+  for char in s:separators
+    execute 'xnoremap i' . char . ' :<c-u>normal! T' . char . 'vt' . char . '<cr>'
+    execute 'onoremap i' . char . ' :normal vi' . char . '<cr>'
+    execute 'xnoremap a' . char . ' :<c-u>normal! F' . char . 'vf' . char . '<cr>'
+    execute 'onoremap a' . char . ' :normal va' . char . '<cr>'
+  endfor
 " }}}
 
 set modelines=1
