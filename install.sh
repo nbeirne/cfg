@@ -3,13 +3,13 @@
 # macOS install script
 
 echo "Installing tools..."
-brew install tmux
-brew install starship
-brew install reattach-to-user-namespace
-brew install the_silver_searcher
-brew install neovim
-brew install ctags
-brew install fzf
+#brew install tmux
+#brew install starship
+#brew install reattach-to-user-namespace
+#brew install the_silver_searcher
+#brew install neovim
+#brew install ctags
+#brew install fzf
 
 
 echo "Linking configs..."
@@ -18,15 +18,14 @@ scriptdir=${0:a:h}
 
 declare -A configdirs
 
-configdirs[zshrc]="~/.zshrc"
-configdirs[starship.toml]="~/.config/starship.toml"
-configdirs[tmux.conf]="~/.tmux.conf"
-configdirs[vim]="~/.vim"
-configdirs[vim]="~/.config/nvim"
-configdirs[bin]="~/.local/bin"
+configdirs[zshrc]="$HOME/.zshrc"
+configdirs[starship.toml]="$HOME/.config/starship.toml"
+configdirs[tmux.conf]="$HOME/.tmux.conf"
+configdirs[vim]="$HOME/.vim"
+configdirs[vim]="$HOME/.config/nvim"
+configdirs[bin]="$HOME/.local/bin"
 
 for source dest in ${(kv)configdirs}; do
-    dest=test/$dest
     destdir=$(dirname $dest)
     src=$scriptdir/$source
     if [ ! -d "$destdir" ]
