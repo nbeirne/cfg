@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ ! -f $1 ] ; then
+   case $1 in
+      *.tar.bz2)   
+          tar cvjf ${@:1}
+          ;;
+      *.tar.gz)    
+          tar cvzf ${@:1}
+          ;;
+      *.tar.xz)    
+          tar cvf ${@:1}
+          ;;
+      *.tar)
+          tar cvf ${@:1}
+          ;;
+      *.tbz2)
+          tar cvjf ${@:1}
+          ;;
+      *.tgz)
+          tar cvzf ${@:1}
+          ;;
+      *.zip)
+          echo "zip -r ${@:1}"
+          zip -r "${@:1}"
+          ;;
+      *.7z)
+          7z c ${@:1}
+          ;;
+      *)  
+          echo "'$1' cannot be extracted via unarchive" 
+          ;;
+  esac
+else
+    echo "'$1' already exists"
+fi

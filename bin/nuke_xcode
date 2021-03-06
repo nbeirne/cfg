@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "Killing Xcode"
+killall Xcode
+
+echo "Removing DerivedData"
+rm -rf ~/Library/Developer/Xcode/DerivedData/*
+
+if [[ -d Pods  && -f Podfile ]]
+then
+  echo "Removing Pods/"
+  rm -rf Pods/
+  echo "Installing pods"
+  bundle exec pod install
+fi
+
+echo "Open Xcode"
+open *.xcworkspace
+
+
