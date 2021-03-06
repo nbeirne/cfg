@@ -13,9 +13,14 @@ if exists("use_plugins")
     Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
     " IDE-like features (none are strictly required).
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'ervandew/supertab'            " contextual tab complete
-    Plug 'majutsushi/tagbar',           { 'on': 'TagbarToggle'    }
+    Plug 'majutsushi/tagbar' ",           { 'on': 'TagbarToggle'    }
+
+    " window navigation with tmux
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'dhruvasagar/vim-zoom'
 
     " language specific plugins
     Plug 'sheerun/vim-polyglot'         " syntax + indentation for a lot of languages.
@@ -74,5 +79,10 @@ if exists("use_plugins")
     " tagbar config
     nmap <Leader>t co
     nmap <Leader>tt :TagbarToggle<CR>
+
+
+    " zoom window
+    nmap <Leader>= <C-w>m
+    nmap <C-=> <C-w>m
 end
 

@@ -2,6 +2,7 @@
 
 export PATH=~/.local/bin/:$PATH
 export EDITOR=nvim
+bindkey -e # disable vim mode in terminal
 
 # various aliases
 alias vim="nvim"

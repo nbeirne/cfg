@@ -1,8 +1,4 @@
-"
-"" Basic VIM settings
-"
-
-" == systemish settings == {{{
+" "" Basic VIM settings " == systemish settings == {{{
   set backspace=indent,eol,start  " allow backspace over everying in insert mode
   set history=1000                " remember 1000 commands and search history
   set visualbell                  " don't beep 
@@ -142,18 +138,19 @@
     nmap <Leader>w <C-w>
 
     " window bindings Alt-Shift-hjkl will resize windows
-    nmap <M-S-h> <C-w><
-    nmap <M-S-l> <C-w>>
-    nmap <M-S-j> <C-w>+
-    nmap <M-S-k> <C-w>-
+    "nmap <M-S-h> <C-w><
+    "nmap <M-S-l> <C-w>>
+    "nmap <M-S-j> <C-w>+
+    "nmap <M-S-k> <C-w>-
 
     " Map Control-hjkl to move between windows
     "nmap <BS> <C-w>h
-    set <C-h>=[104;5u
-    nmap <C-h> <C-w>h
-    nmap <C-j> <C-w>j
-    nmap <C-k> <C-w>k
-    nmap <C-l> <C-w>l
+    "set <C-h>=[104;5u
+    "nmap <C-h> <C-w>h
+    "nmap <C-j> <C-w>j
+    "nmap <C-k> <C-w>k
+    "nmap <C-l> <C-w>l
+
 
     " map Control-d, Control-\, and Control-- to manage splits
     nmap <C-w>\ :vsplit<CR>
