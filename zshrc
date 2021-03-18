@@ -23,14 +23,18 @@ HISTCONTROL=ignoredups:erasedups
 # append to history after each command, and load after each command
 setopt SHARE_HISTORY
 
+# macos complains about insecure directories
+ZSH_DISABLE_COMPFIX="true"
 
 # tab complete tweaks
 autoload -Uz compinit
 compinit
 zstyle ':completion:*' menu select
 
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-# history search with CTRL-R
+
+# history search with CTRL-R. Paste path with CTRL-T. cd with ALT-C (not in iterm)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # prompt

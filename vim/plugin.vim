@@ -24,6 +24,7 @@ if exists("use_plugins")
 
     " language specific plugins
     Plug 'sheerun/vim-polyglot'         " syntax + indentation for a lot of languages.
+    Plug 'editorconfig/editorconfig-vim' " configurable stuff
 
     " language completions and syntax errors. 
     "Plug 'w0rp/ale'                     " syntax errors
