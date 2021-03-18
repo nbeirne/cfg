@@ -3,14 +3,7 @@ vim/doc
 vim/bin
 vim/plugin
 .netrwhist
-.*
-fish_history
+*_history
 fishd*
-xmonad.errors
-xmonad-x86_64-linux
-fish_read_history
-wallpapers
-fish_history*
 tags
 
-bin/

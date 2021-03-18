@@ -28,7 +28,7 @@ if [ ! -f $1 ] ; then
           7z c ${@:1}
           ;;
       *)  
-          echo "'$1' cannot be extracted via unarchive" 
+          echo "'$1' cannot be compressed via archive" 
           ;;
   esac
 else
