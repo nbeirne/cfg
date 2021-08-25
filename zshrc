@@ -4,6 +4,13 @@ export PATH=~/.local/bin/:$PATH
 export EDITOR=nvim
 bindkey -e # disable vim mode in terminal
 
+# no control d
+set -o ignoreeof
+
+# fix home/end
+bindkey "\e[H"  beginning-of-line
+bindkey "\e[F"  end-of-line
+
 # various aliases
 alias vim="nvim"
 alias vi="nvim"

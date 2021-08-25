@@ -17,6 +17,7 @@ if exists("use_plugins")
     Plug 'junegunn/fzf.vim'
     Plug 'ervandew/supertab'            " contextual tab complete
     Plug 'majutsushi/tagbar' ",           { 'on': 'TagbarToggle'    }
+    Plug 'tpope/vim-fugitive'           " git stuff
 
     " window navigation with tmux
     Plug 'christoomey/vim-tmux-navigator'
@@ -44,17 +45,25 @@ if exists("use_plugins")
 
     " grepper config
     let g:grepper = {
-                \ 'tools': ['ag', 'git', 'findf'],
+                \ 'tools': ['ag', 'code', 'git', 'findf'],
                 \ 'open':  1,
                 \ 'jump':  0,
                 \ 'highlight': '1',
                 \ 'findf': {
-                \   'grepprg': 'find . -iregex ".*$*.*" | sed -e "s/\.\///g"',
-                \   'grepformat': '%f',
-                \   'escape': ''
-                \ }}
+                \     'grepprg': 'find . -iregex ".*$*.*" | sed -e "s/\.\///g"',
+                \     'grepformat': '%f',
+                \     'escape': '' },
+                \ 'code': {
+                \     'grepprg': 'ag --vimgrep -G "\.*\.[hmc]m?$" --ignore "*Tests*"',
+                \     'grepformat': '%f:%l:%c:%m,%f:%l:%m,%f',
+                \     'escape':     '\^$.*+?()[]{}|' },
+                \ }
     nnoremap <Leader>/ :Grepper -tool ag -highlight<CR> 
     nnoremap <Leader>* :Grepper -tool ag -highlight -noprompt -cword<CR> 
+    command! -nargs=+ Scode :Grepper -tool code -highlight -noprompt -query '<args>' 
+    command! Todo :Grepper -tool ag -query '\(TODO\|FIXME\)'
+
+    "ag --vimgrep> '\binitializeWithGameId\b' --ignore '*Tests*'  -G '\.*\.m'
 
 
     " fzf config
