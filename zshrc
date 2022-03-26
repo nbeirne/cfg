@@ -1,15 +1,14 @@
 
-
-export PATH=~/.local/bin/:$PATH
 export EDITOR=nvim
 bindkey -e # disable vim mode in terminal
 
 # no control d
 set -o ignoreeof
 
-# fix home/end
+# fix home/end/delete in tmux
 bindkey "\e[H"  beginning-of-line
 bindkey "\e[F"  end-of-line
+bindkey  "^[[3~"  delete-char
 
 # various aliases
 alias vim="nvim"
@@ -41,9 +40,19 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 
+# option-arrow movement. inclusion makes these included in the  "word"
+#export WORDCHARS="" #"*?_-.[]~=/&;!#$%^(){}<>" 
+
+export PATH=~/.local/bin/:$PATH
+
 # history search with CTRL-R. Paste path with CTRL-T. cd with ALT-C (not in iterm)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# ignore specfic folders
+export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -p ~/.fzfignore -g ""'
 
 # prompt
 eval "$(starship init zsh)"
 
+
+
+. ~/.local-env.sh

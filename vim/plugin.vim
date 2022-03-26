@@ -18,6 +18,7 @@ if exists("use_plugins")
     Plug 'ervandew/supertab'            " contextual tab complete
     Plug 'majutsushi/tagbar' ",           { 'on': 'TagbarToggle'    }
     Plug 'tpope/vim-fugitive'           " git stuff
+    Plug 'preservim/nerdtree'
 
     " window navigation with tmux
     Plug 'christoomey/vim-tmux-navigator'
@@ -43,23 +44,28 @@ if exists("use_plugins")
     nmap <Leader>bd :Kwbd<CR>
 
 
+    let code_extensions="(go|h|mm|m|c|sh|py|cs|java|ts|js)"
+    let code_cmd='ag --vimgrep --ignore "*[Tt]est*" --ignore "*[Mm]ock*" --ignore "*vendor*" -G "\.*\.'.code_extensions.'$"'
     " grepper config
     let g:grepper = {
-                \ 'tools': ['ag', 'code', 'git', 'findf'],
+                \ 'tools': ['code', 'ag', 'code-word'],
+                \ 'simple_prompt':  1,
+                \ 'prompt_text':   '\$t> ',
                 \ 'open':  1,
                 \ 'jump':  0,
                 \ 'highlight': '1',
-                \ 'findf': {
-                \     'grepprg': 'find . -iregex ".*$*.*" | sed -e "s/\.\///g"',
-                \     'grepformat': '%f',
-                \     'escape': '' },
                 \ 'code': {
-                \     'grepprg': 'ag --vimgrep -G "\.*\.[hmc]m?$" --ignore "*Tests*"',
+                \     'grepprg': code_cmd . ' "$*"',
                 \     'grepformat': '%f:%l:%c:%m,%f:%l:%m,%f',
-                \     'escape':     '\^$.*+?()[]{}|' },
+                \     'escape':     '^$.*+?()[]{}|"' },
+                \ 'code-word': {
+                \     'grepprg': code_cmd ,
+                \     'grepformat': '%f:%l:%c:%m,%f:%l:%m,%f',
+                \     'escape':     '^$.*+?()[]{}|"' },
                 \ }
-    nnoremap <Leader>/ :Grepper -tool ag -highlight<CR> 
-    nnoremap <Leader>* :Grepper -tool ag -highlight -noprompt -cword<CR> 
+    let g:grepper.prompt_text = '$c> '
+    nnoremap <Leader>/ :Grepper<CR>
+    nnoremap <Leader>* :Grepper -tool code-word -highlight -noprompt -cword<CR> 
     command! -nargs=+ Scode :Grepper -tool code -highlight -noprompt -query '<args>' 
     command! Todo :Grepper -tool ag -query '\(TODO\|FIXME\)'
 
