@@ -41,7 +41,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 
 # option-arrow movement. inclusion makes these included in the  "word"
-#export WORDCHARS="" #"*?_-.[]~=/&;!#$%^(){}<>" 
+export WORDCHARS="" #"*?_-.[]~=/&;!#$%^(){}<>" 
 
 export PATH=~/.local/bin/:$PATH
 
@@ -53,6 +53,5 @@ export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -p ~/.fzfignore -g ""'
 # prompt
 eval "$(starship init zsh)"
 
-
-
 . ~/.local-env.sh
+
