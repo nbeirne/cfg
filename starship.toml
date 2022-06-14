@@ -34,7 +34,6 @@ commit_hash_length = 8
 style = "bold white"
 
 [git_state]
-progress_divider = " of "
 
 [git_status]
 conflicted = "⚔️ "

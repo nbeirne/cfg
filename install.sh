@@ -3,13 +3,14 @@
 # macOS install script
 
 echo "Installing tools..."
-#brew install tmux
-#brew install starship
-#brew install reattach-to-user-namespace
-#brew install the_silver_searcher
-#brew install neovim
-#brew install ctags
-#brew install fzf
+brew install tmux
+brew install tmuxinator
+brew install starship
+brew install reattach-to-user-namespace
+brew install the_silver_searcher
+brew install neovim
+brew install ctags
+brew install fzf
 
 
 echo "Linking configs..."
@@ -43,4 +44,13 @@ for source dest in ${(kv)configdirs}; do
     fi
 done
 
+
+echo << EOF
+Next steps:
+- Go ento vim and :PlugInstall
+- Setup tmuxinator dev environment
+- Go into iTerm Settings > Profiles > Text and set the font to Fira code
+- Go into iTerm Settings > Profiles > Keys and load the Natural Text Editing preset
+- Go into iTerm Settings > Profiles > Colors and load the Pastel preset
+EOF
 
