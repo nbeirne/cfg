@@ -2,19 +2,63 @@
 
 echo "Killing Xcode"
 killall Xcode
+XCODE_RUNNING=$?
 
 echo "Removing DerivedData"
 rm -rf ~/Library/Developer/Xcode/DerivedData/*
 
-if [[ -d Pods  && -f Podfile ]]
+echo "Removing Simulators"
+xcrun simctl delete unavailable
+xcrun simctl list devices | grep -E -o -i "([0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})" | xargs -L1 xcrun simctl delete
+
+GIT_TOPLEVEL=$(git rev-parse --show-toplevel)
+GIT_REPO=$?
+if [ ! -z "$GIT_TOPLEVEL" ]
 then
-  echo "Removing Pods/"
-  rm -rf Pods/
-  echo "Installing pods"
-  bundle exec pod install
+  echo "Cleaning git directory $GIT_TOPLEVEL"
+  pushd "$GIT_TOPLEVEL"
+  git clean -fdx
+  popd
 fi
 
-echo "Open Xcode"
-open *.xcworkspace
+echo "Adding Minimum Set of Simulators"
+IOS_RUNTIMES=(
+  "iOS16.4"
+)
+IOS_DEVICES=(
+  "iPhone 14 Pro"
+  "iPhone 14 Plus"
+  "iPhone 14 Plus HU"
+  "iPhone SE (3rd generation)"
+  "iPhone SE (3rd generation) HU"
+  "iPhone 8 Plus"
+  "iPhone 8"
+  "iPad Pro (12.9-inch) (6th generation)"
+  "iPad Pro (12.9-inch) (6th generation) HU"
+)
 
+for DEVICE in "${IOS_DEVICES[@]}"
+do
+  for RUNTIME in "${IOS_RUNTIMES[@]}"
+  do
+    NAME="$DEVICE-$RUNTIME"
+    echo "Creating $NAME"
+    xcrun simctl create "$NAME" "$DEVICE" "$RUNTIME"
+  done
+done
+
+
+if [[ -f Podfile ]]
+then
+  echo "Removing Pods/"
+  rm -rf Podfile.lock Pods/
+  echo "Installing pods"
+  pod install
+fi
+
+if [ $XCODE_RUNNING -eq 0 ]
+then
+  echo "Open Xcode"
+  open *.xcworkspace
+fi
 
