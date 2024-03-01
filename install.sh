@@ -25,6 +25,7 @@ configdirs[tmux.conf]="$HOME/.tmux.conf"
 configdirs[vim]="$HOME/.vim"
 configdirs[vim]="$HOME/.config/nvim"
 configdirs[bin]="$HOME/.local/bin"
+configdirs[githooks]="$HOME/.git/hooks"
 
 for source dest in ${(kv)configdirs}; do
     destdir=$(dirname $dest)
@@ -52,5 +53,7 @@ Next steps:
 - Go into iTerm Settings > Profiles > Text and set the font to Fira code
 - Go into iTerm Settings > Profiles > Keys and load the Natural Text Editing preset
 - Go into iTerm Settings > Profiles > Colors and load the Pastel preset
+- setup global git hooks "git config --global core.hooksPath ~/.git/hooks/"
+
 EOF
 

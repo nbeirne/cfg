@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# Put this into .git/hooks/prepare-commit-msg and mark it as executable. Add this to your ~/.gitconfig:
+#  [core]
+#    hooksPath = /Users/nick.beirne/.git/hooks/
+
+# This hook will prepend JIRA ticket numbers to your commit messages. It works with -m and with the plain `git commit`.
+
+# This expects your branches to be in one of these formats:
+# 1. `(feature|bug|fix)/JIRA-XXX-some-description`
+# 2. `(feature|bug|fix)/JIRA-XXX`
+# 3. `JIRA-XXX-some-description`
+# 4. `JIRA-XXX`
+
+
+# constant regex
+TICKET_TYPES="(feature|bug|fix|bugfix)"
+JIRA_TICKET="[A-Z0-9]{2,5}-[0-9]+"
+DESCRIPTION=".*"
+BRANCH_REGEX="^($TICKET_TYPES/)?($JIRA_TICKET)(-$DESCRIPTION)?$"
+
+# rvar is the return value of functions...
+rvar=
+
+parse() {
+  branch=$1
+
+  if [[ $branch =~ $BRANCH_REGEX ]]
+  then
+    ticket="${BASH_REMATCH[3]}"
+    rvar=$ticket
+  fi
+}
+
+
+# inputs
+COMMIT_MSG_FILE=$1
+COMMIT_MODE=$2
+SHA1=$3
+
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+parse $GIT_BRANCH
+ticket=$rvar
+
+if [[ -z "$GIT_BRANCH" ]]
+then
+  echo "prepare-commit-msg: no git branch; no action"
+  exit 0
+fi
+
+if [[ -z "$ticket" ]]
+then
+  echo "prepare-commit-msg: cannot parse ticket; no action"
+  exit 0
+fi
+
+cleaned_msg=$(echo "$COMMIT_MSG" | sed -e '/^#/d')
+if [[ $cleaned_msg =~ $ticket ]]
+then
+  echo $cleaned_msg
+  echo "prepare-commit-msg: found ticket in message; no action"
+  exit 0
+fi
+
+if [[ "$COMMIT_MODE" = "message" ]]
+then
+  echo "prepare-commit-msg: 'message' commit type; prepend ticket"
+  echo "$COMMIT_MSG" > "$COMMIT_MSG_FILE"
+  echo $'\n' >> "$COMMIT_MSG_FILE"
+  echo "JIRA: ${ticket}" >> "$COMMIT_MSG_FILE"
+elif [[ -z "$COMMIT_MODE" ]]
+then
+  echo "prepare-commit-msg: no commit type; prepend ticket"
+  echo $'\n' > "$COMMIT_MSG_FILE"
+  echo "JIRA: ${ticket}" >> "$COMMIT_MSG_FILE"
+  echo "$COMMIT_MSG" >> "$COMMIT_MSG_FILE"
+fi
+
