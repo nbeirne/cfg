@@ -78,8 +78,8 @@
 " }}}
 
 " == status and title == {{{
-  "set laststatus=2    " always show status line
-  set laststatus=1    " only show status line on multiple windows
+  set laststatus=2    " always show status line
+  "set laststatus=1    " only show status line on multiple windows
   set ruler           " always show columns/lines in status 
   set wildmenu        " allow status line completions (files, commands, etc)
   set wildignorecase  " ignore case in tab complete

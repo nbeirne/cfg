@@ -12,6 +12,7 @@ if exists("use_plugins")
     Plug 'joshdick/onedark.vim'
     Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
+
     " IDE-like features (none are strictly required).
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -27,7 +28,7 @@ if exists("use_plugins")
     " language specific plugins
     Plug 'sheerun/vim-polyglot'         " syntax + indentation for a lot of languages.
     Plug 'editorconfig/editorconfig-vim' " configurable stuff
-
+    "Plug 'darfink/vim-plist'
     " language completions and syntax errors. 
     "Plug 'w0rp/ale'                     " syntax errors
 
@@ -44,7 +45,7 @@ if exists("use_plugins")
     nmap <Leader>bd :Kwbd<CR>
 
 
-    let code_extensions="(go|h|mm|m|c|sh|py|cs|java|ts|js)"
+    let code_extensions="(go|h|mm|m|c|sh|py|cs|java|ts|js|rb|swift|php|pl|cgi)"
     let code_cmd='ag --vimgrep --ignore "*[Tt]est*" --ignore "*[Mm]ock*" --ignore "*vendor*" -G "\.*\.'.code_extensions.'$"'
     " grepper config
     let g:grepper = {
