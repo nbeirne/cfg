@@ -1,0 +1,13 @@
+listContent() {
+  local dir=${1:-.} whitespacePrefix=$2 file
+  for file in "$dir"/*; do
+    [ -e "$file" ] || [ -L "$file" ] || continue
+    if [ -d "$file" ]; then
+      printf '%s%q\n' "$whitespacePrefix" "${file##*/}"
+      listContent "$file" "${whitespacePrefix}    "
+    else
+      printf '%s%q\n' "$whitespacePrefix" "${file##*/}"
+    fi
+  done
+}
+
