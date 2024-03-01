@@ -28,6 +28,7 @@ alias ll="ls -l"
 HISTCONTROL=ignoredups:erasedups
 # append to history after each command, and load after each command
 setopt SHARE_HISTORY
+setopt histignorespace
 
 # macos complains about insecure directories
 ZSH_DISABLE_COMPFIX="true"
@@ -44,6 +45,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 export WORDCHARS="" #"*?_-.[]~=/&;!#$%^(){}<>" 
 
 export PATH=~/.local/bin/:$PATH
+export PATH=~/.git/commands/:$PATH
 
 # history search with CTRL-R. Paste path with CTRL-T. cd with ALT-C (not in iterm)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -53,8 +55,5 @@ export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -p ~/.fzfignore -g ""'
 # prompt
 eval "$(starship init zsh)"
 
-. ~/.local-env.sh
+eval "$(rbenv init - $(basename $SHELL))"
 
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
