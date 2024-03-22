@@ -42,17 +42,18 @@ endif
 
 exec "so " . g:load_path . "/base.vim"
 exec "so " . g:load_path . "/gvim.vim"
-exec "so " . g:load_path . "/plugin.vim"
+"exec "so " . g:load_path . "/plugin.vim"
 
 if has("nvim")
   set mouse=a
+  exec "so " . g:load_path . "/plugin.lua"
 " == NVIM Specific Settigngs == {{{
   "tnoremap <Esc> <C-\><C-n>
 " }}}
 else
 " == Vim Specific System Settings == {{{
   set viminfo+=n~/.local/share/viminfo
-  set directory^=$HOME/.vim/tmp//
+  set directory^=$HOME/.vim/tmp/
 
   set mouse=a
   set ttymouse=xterm2
