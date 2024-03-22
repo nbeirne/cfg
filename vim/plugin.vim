@@ -12,14 +12,19 @@ if exists("use_plugins")
     Plug 'joshdick/onedark.vim'
     Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
-
     " IDE-like features (none are strictly required).
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'ervandew/supertab'            " contextual tab complete
-    Plug 'majutsushi/tagbar' ",           { 'on': 'TagbarToggle'    }
     Plug 'tpope/vim-fugitive'           " git stuff
-    Plug 'preservim/nerdtree'
+
+    Plug 'neovim/nvim-lspconfig'        " language server
+    Plug 'prettier/vim-prettier', {
+      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+
+    
+    "Plug 'ervandew/supertab'            " contextual tab complete
+    "Plug 'majutsushi/tagbar' ",           { 'on': 'TagbarToggle'    }
+    "Plug 'preservim/nerdtree'
 
     " window navigation with tmux
     Plug 'christoomey/vim-tmux-navigator'
@@ -27,10 +32,11 @@ if exists("use_plugins")
 
     " language specific plugins
     Plug 'sheerun/vim-polyglot'         " syntax + indentation for a lot of languages.
-    Plug 'editorconfig/editorconfig-vim' " configurable stuff
+    Plug 'editorconfig/editorconfig-vim' " project editor configurations
     "Plug 'darfink/vim-plist'
     " language completions and syntax errors. 
     "Plug 'w0rp/ale'                     " syntax errors
+
 
     call plug#end()
 
@@ -78,28 +84,35 @@ if exists("use_plugins")
     nmap <Leader>fb :Buffers<CR>
     nmap <Leader>ft :Tags<CR>
 
-
     " supertab config
-    set completeopt=longest,menuone,preview,noinsert
-    let g:SuperTabDefaultCompletionType = "context"
-    let g:SuperTabContextDefaultCompletionType = "<c-p>"
-    let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-    let g:SuperTabContextDiscoverDiscovery = ["&omnifunc:<c-x><c-o>"]
-    let g:SuperTabCrMapping = 1
-    autocmd FileType * 
-                \if &omnifunc != '' |
-                \call SuperTabChain(&omnifunc, "<c-p>") |
-                \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-                \endif
-
+    "set completeopt=longest,menuone,preview,noinsert
+    "let g:SuperTabDefaultCompletionType = "context"
+    "let g:SuperTabContextDefaultCompletionType = "<c-p>"
+    "let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+    "let g:SuperTabContextDiscoverDiscovery = ["&omnifunc:<c-x><c-o>"]
+    "let g:SuperTabCrMapping = 1
+    "autocmd FileType * 
+    "            \if &omnifunc != '' |
+    "            \call SuperTabChain(&omnifunc, "<c-p>") |
+    "            \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+    "            \endif
 
     " tagbar config
-    nmap <Leader>t co
-    nmap <Leader>tt :TagbarToggle<CR>
+    "nmap <Leader>t co
+    "nmap <Leader>tt :TagbarToggle<CR>
+
+    " prettier
+    "let g:prettier#autoformat = 1
+    "let g:prettier#autoformat_require_pragma = 0
+
 
 
     " zoom window
     nmap <Leader>= <C-w>m
     nmap <C-=> <C-w>m
+
+    if has("nvim")
+        exec "so " . g:load_path . "/lsp.lua"
+    end
 end
 
