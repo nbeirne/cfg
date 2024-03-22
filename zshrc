@@ -10,6 +10,7 @@ bindkey "\e[H"  beginning-of-line
 bindkey "\e[F"  end-of-line
 bindkey  "^[[3~"  delete-char
 bindkey "\e[3~" delete-char
+#bindkey "^[b" delete-word
 
 
 # various aliases
@@ -60,6 +61,8 @@ export PATH=~/.git/commands/:$PATH
 
 # ignore specfic folders
 export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore_global -p ~/.fzfignore -g ""'
+#export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
+
 
 
 # prompt
