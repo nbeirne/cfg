@@ -41,6 +41,12 @@ if [ -f "$1" ] ; then
       *.7z)
           7z x $1         
           ;;
+      *.jar)
+          unzip $1         
+          ;;
+      *.aar)
+          unzip $1         
+          ;;
       *.apk)
           unzip $1         
           ;;
