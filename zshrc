@@ -53,9 +53,6 @@ export WORDCHARS="" #"*?_-.[]~=/&;!#$%^(){}<>"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-export PATH=~/.local/bin/:$PATH
-export PATH=~/.git/commands/:$PATH
-
 
 # history search with CTRL-R. Paste path with CTRL-T. cd with ALT-C (not in iterm)
 eval "$(fzf --zsh)"
@@ -80,3 +77,6 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(rbenv init - $(basename $SHELL))"
 
+export PATH=~/.local/bin/:$PATH
+export PATH=~/.git/commands/:$PATH
+export PATH=~/.ghcup/bin:$PATH

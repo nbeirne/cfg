@@ -17,9 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 
 
 require("lazy").setup({
-  -- "folke/which-key.nvim",
-  -- { "folke/neoconf.nvim", cmd = "Neoconf" },
-  -- "folke/neodev.nvim",
   { 
     "challenger-deep-theme/vim",
     lazy = false,
@@ -27,6 +24,19 @@ require("lazy").setup({
     config = function() 
       vim.cmd [[colorscheme challenger_deep]]
     end,
+  },
+
+  -- Window navigation with tmux
+  "christoomey/vim-tmux-navigator",
+
+  { 
+    "declancm/maximize.nvim", 
+    keys = { 
+      "<Leader>z",
+      { "<C-w>=", "<Cmd>lua require('maximize').toggle()<CR>" },
+      { "<Leader>=", "<Cmd>lua require('maximize').toggle()<CR>" },
+    },
+    opts = {}, -- call setup
   },
 
   "yssl/QFEnter",
@@ -70,41 +80,23 @@ require("lazy").setup({
     end,
   },
 
-  -- Window navigation with tmux
-  "christoomey/vim-tmux-navigator",
-
-  { 
-    "declancm/maximize.nvim", 
-    keys = { 
-      "<Leader>z",
-      { "<C-w>=", "<Cmd>lua require('maximize').toggle()<CR>" },
-      { "<Leader>=", "<Cmd>lua require('maximize').toggle()<CR>" },
-    },
-    opts = {}, -- call setup
+  { -- manage tags using m and '
+    "kshenoy/vim-signature",
+    --keys = {
+    --  "mx",
+    --  "dmx",
+    --  "m,",
+    --  "m.",
+    --  "m-",
+    --  "m<Space>",
+    --  "m/",
+    --}
   },
 
-  -- language plugins
-    "sheerun/vim-polyglot",          -- syntax + indentation for a lot of languages.
-    "editorconfig/editorconfig-vim", -- project editor configurations
-
-
   --- IDE like features.
-  -- prettier
   'tpope/vim-fugitive', -- git 
   'tpope/vim-surround', 
 
-
-  { 
-    "neovim/nvim-lspconfig",
-    config = function()
-      require("lsp")
-    end,
-  },
-
-  {
-    "prettier/vim-prettier",
-    ft = { "javascript", "typescript", "css", "less", "scss", "json", "graphql", "markdown", "vue", "svelte", "yaml", "html" },
-  },
 
   {
     "nvim-telescope/telescope.nvim", tag = "0.1.6",
@@ -133,7 +125,24 @@ require("lazy").setup({
       vim.opt.termguicolors = true
       require("nvim-tree").setup({})
     end,
-  }
+  },
+
+  -- language plugins
+  "sheerun/vim-polyglot",          -- syntax + indentation for a lot of languages.
+  "editorconfig/editorconfig-vim", -- project editor configurations
+
+  { 
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("lsp")
+    end,
+  },
+
+  {
+    "prettier/vim-prettier",
+    ft = { "javascript", "typescript", "css", "less", "scss", "json", "graphql", "markdown", "vue", "svelte", "yaml", "html" },
+  },
+
 })
 
 
