@@ -50,13 +50,13 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # option-arrow movement. inclusion makes them included in the "word"
 export WORDCHARS="" #"*?_-.[]~=/&;!#$%^(){}<>"
 
-
+eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH=~/.local/bin/:$PATH
 export PATH=~/.git/commands/:$PATH
 
 
 # history search with CTRL-R. Paste path with CTRL-T. cd with ALT-C (not in iterm)
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fzf --zsh)"
 
 
 # ignore specfic folders
