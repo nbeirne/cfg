@@ -91,6 +91,8 @@ require("lazy").setup({
   --- IDE like features.
   -- prettier
   'tpope/vim-fugitive', -- git 
+  'tpope/vim-surround', 
+
 
   { 
     "neovim/nvim-lspconfig",
@@ -116,6 +118,21 @@ require("lazy").setup({
       { "<Leader>fb", "<cmd>Telescope buffers<CR>" },
       { "<Leader>fg", "<cmd>Telescope live_grep<CR>" },
     },
+  },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+     "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+      vim.opt.termguicolors = true
+      require("nvim-tree").setup({})
+    end,
   }
 })
 
