@@ -21,6 +21,7 @@ alias tml="tmux list-sessions"
 alias tm="tmuxa"
 
 alias :q='exit'
+alias :Q='exit'
 alias ls="ls -h -F -G"
 alias la="ls -la"
 alias ll="ls -l"
@@ -51,6 +52,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 export WORDCHARS="" #"*?_-.[]~=/&;!#$%^(){}<>"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
 export PATH=~/.local/bin/:$PATH
 export PATH=~/.git/commands/:$PATH
 
@@ -64,13 +66,13 @@ export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore_global -p ~/.fzfignore -g ""'
 #export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
 
 
-
 # prompt
 eval "$(starship init zsh)"
 
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
