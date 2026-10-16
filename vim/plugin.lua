@@ -36,37 +36,37 @@ require("lazy").setup({
     },
   },
 
-  { -- todo: switch to rg?
-    "mhinz/vim-grepper",
-    lazy = false,
-    keys = { 
-      { "<Leader>/", "<cmd>Grepper<CR>" },
-      { "<Leader>*", "<cmd>Grepper -tool code-word -highlight -noprompt -cword<CR>" },
-    },
-    config = function()
-      vim.cmd([[
-        let code_extensions = "(go|h|mm|m|c|sh|py|cs|java|ts|js|rb|swift|php|pl|cgi)"
-        let code_cmd='ag --vimgrep --ignore "*[Tt]est*" --ignore "*[Mm]ock*" --ignore "*vendor*" -G "\\.*\\.' . code_extensions . '$"'
-        let g:grepper = {
-                \ 'tools': ['code', 'ag', 'code-word'],
-                \ 'simple_prompt':  1,
-                \ 'prompt_text':   '\$t> ',
-                \ 'open':  1,
-                \ 'jump':  0,
-                \ 'highlight': '1',
-                \ 'code': {
-                \     'grepprg': code_cmd . ' "$*"',
-                \     'grepformat': '%f:%l:%c:%m,%f:%l:%m,%f',
-                \     'escape':     '^$.*+?()[]{}|"' },
-                \ 'code-word': {
-                \     'grepprg': code_cmd,
-                \     'grepformat': '%f:%l:%c:%m,%f:%l:%m,%f',
-                \     'escape':     '^$.*+?()[]{}|"' },
-                \ }
-      ]])
-
-    end,
-  },
+--  { -- todo: switch to rg?
+--    "mhinz/vim-grepper",
+--    lazy = false,
+--    keys = { 
+--      { "<Leader>/", "<cmd>Grepper<CR>" },
+--      { "<Leader>*", "<cmd>Grepper -tool code-word -highlight -noprompt -cword<CR>" },
+--    },
+--    config = function()
+--      vim.cmd([[
+--        let code_extensions = "(go|h|mm|m|c|sh|py|cs|java|ts|js|rb|swift|php|pl|cgi)"
+--        let code_cmd='ag --vimgrep --ignore "*[Tt]est*" --ignore "*[Mm]ock*" --ignore "*vendor*" -G "\\.*\\.' . code_extensions . '$"'
+--        let g:grepper = {
+--                \ 'tools': ['code', 'ag', 'code-word'],
+--                \ 'simple_prompt':  1,
+--                \ 'prompt_text':   '\$t> ',
+--                \ 'open':  1,
+--                \ 'jump':  0,
+--                \ 'highlight': '1',
+--                \ 'code': {
+--                \     'grepprg': code_cmd . ' "$*"',
+--                \     'grepformat': '%f:%l:%c:%m,%f:%l:%m,%f',
+--                \     'escape':     '^$.*+?()[]{}|"' },
+--                \ 'code-word': {
+--                \     'grepprg': code_cmd,
+--                \     'grepformat': '%f:%l:%c:%m,%f:%l:%m,%f',
+--                \     'escape':     '^$.*+?()[]{}|"' },
+--                \ }
+--      ]])
+--
+--    end,
+--  },
 
   --- IDE like features.
   'tpope/vim-fugitive', -- git 

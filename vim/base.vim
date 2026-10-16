@@ -22,7 +22,7 @@ set scrolloff=4         " start scrolling 8 rows above/below the top/bottom
 set sidescrolloff=8     " start scrolling 8 cols to the side fo the screen
 
 "set list                " end of line/tab chars 
-set listchars=eol:¬,extends:…,precedes:…,tab:▸\ 
+"set listchars=eol:¬,extends:…,precedes:…,tab:▸\ 
 
 " statusline 
 "set laststatus=1    " only show status line on multiple windows
@@ -76,12 +76,7 @@ let mapleader = " "
 " == Quickfix == 
 
 augroup qf
-  " UP will go to the previous result, DOWN will go to the next result
-  autocmd FileType qf setlocal nobuflisted
-  autocmd FileType qf setlocal norelativenumber
-  autocmd FileType qf setlocal wrap
-  "autocmd WinLeave * set cul
-  "autocmd WinEnter * set nocul
+  autocmd FileType qf setlocal nobuflisted " take quickfix buffer out of the buflist (:bl and <Space>fb)
 augroup END
 
 aug QFClose
