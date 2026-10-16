@@ -3,7 +3,21 @@
 let s:dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let &runtimepath = s:dir . ',' . &runtimepath
 
+" nvim defaults that Vim lacks. Before base.vim, since `syntax on` would reset its colorscheme.
 filetype plugin indent on
+syntax on
+set hidden
+set nrformats-=octal
+set autoindent
+set smarttab
+set incsearch
+set hlsearch
+set sidescroll=1
+set laststatus=2
+set ruler
+" nvim has belloff=all, so it never beeps.
+set visualbell
+
 runtime base.vim
 
 set viminfo+=n~/.local/share/viminfo

@@ -1,17 +1,13 @@
 " == Basic VIM settings ==
 set backspace=indent,eol,start  " allow backspace over everying in insert mode
 set history=1000                " remember 1000 commands and search history
-set visualbell                  " don't beep 
 set fileformats=unix,dos,mac    " be able to read os file formats without issues
-set hidden                      " handles mutliple buffers better
-set nrformats-=octal            " ctrl-a does NOT increase octal (hex/dec only)
 let g:netrw_liststyle=3         " netrw tree list 
 set textwidth=0                 " no auto newline
 
 "set autoread                    " When a file changes out of vim, read it again 
 
-" == visual settings == 
-syntax on                       " syntax highlighting
+" == visual settings ==
 set noshowmatch                 " don't jump to matching paren
 set showmode                    " shows the current mode
 set showcmd                     " Shows the input from an incomplete command
@@ -29,19 +25,15 @@ set number             " line numbers
 colorscheme ron
 
 " == indentation ==
-set autoindent      " always autoindent
-set smartindent     " smart indentation after a new line (ie, {, }, 
+set smartindent     " smart indentation after a new line (ie, {, },
 set tabstop=4       " a tab is four spaces
 set shiftwidth=4    " number of spaces to use for autoindenting
-set smarttab        " insert tabs at the start of a line according to shiftwidth
 set expandtab       " insert spaces when tab is pressed
 set shiftround      " use multiple of Shiftwidth when indenting with '<' and '>'
 
 
 " == search and quickfix ==
-set path=.,,,**     " path for :find 
-set incsearch       " show matches as you type
-set hlsearch        " highlight search terms
+set path=.,,,**     " path for :find
 set ignorecase      " ignore case
 set smartcase       " if you search with a capital, don't ignore case
 aug QFClose
@@ -66,13 +58,10 @@ set nowritebackup   " push saves to the original file, as opposed to saving
 " == scrolling ==
 set scrolloff=4         " start scrolling 8 rows above/below the top/bottom
 set sidescrolloff=8     " start scrolling 8 cols to the side fo the screen
-set sidescroll=1        " number of spaces to jump when scrolling to the side
 
 
 " == status and title ==
-set laststatus=2    " always show status line
 "set laststatus=1    " only show status line on multiple windows
-set ruler           " always show columns/lines in status line
 
 set wildmenu        " allow status line completions (files, commands, etc)
 set wildignorecase  " ignore case in tab complete
