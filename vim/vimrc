@@ -8,6 +8,7 @@ filetype plugin indent on
 syntax on
 set history=10000
 set hidden
+set autoread
 set nrformats-=octal
 set autoindent
 set smarttab

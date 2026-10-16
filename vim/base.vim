@@ -1,8 +1,6 @@
 " == Basic VIM settings ==
 let g:netrw_liststyle=3   " netrw tree list
 
-"set autoread              " When a file changes out of vim, read it again 
-
 set clipboard=unnamed     " Copy and Paste to system clipboard (use unnamedplus on linux)
 
 
@@ -17,8 +15,8 @@ set linebreak             " break on words when wrap is on
 "set list                  " end of line/tab chars 
 set number                " line numbers
 "set relativenumber        " relative number to the current column
-set scrolloff=4           " start scrolling 8 rows above/below the top/bottom
-set sidescrolloff=8       " start scrolling 8 cols to the side fo the screen
+set scrolloff=4           " start scrolling n rows above/below the top/bottom
+set sidescrolloff=8       " start scrolling n cols to the side fo the screen
 
 
 " == indentation ==
@@ -50,6 +48,7 @@ endif
 " == quickfix window and filetype behaviours == 
 
 augroup qf
+  au!
   autocmd FileType qf setlocal nobuflisted " take quickfix buffer out of the buflist (:bl and <Space>fb)
 augroup END
 
