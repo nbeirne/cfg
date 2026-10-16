@@ -1,10 +1,5 @@
 " == Basic VIM settings ==
-set fileformats=unix,dos,mac    " be able to read os file formats without issues
 let g:netrw_liststyle=3         " netrw tree list
-
-set nowritebackup   " push saves to the original file, as opposed to saving 
-" to a new file then renaming it.
-" set noswapfile     " removes the 'swap' file (*.*.swp) 
 
 "set autoread                    " When a file changes out of vim, read it again 
 
@@ -12,26 +7,30 @@ set nowritebackup   " push saves to the original file, as opposed to saving
 set clipboard=unnamed
 
 " == visual settings ==
+
 colorscheme ron
 
 set nowrap                      " do not wrap text in editor
 set linebreak                   " break on words when wrap is on
-set listchars=eol:¬,extends:…,precedes:…,tab:▸\ 
 "set colorcolumn=81      " show a line at the 81st column
 "set cursorline          " highlight the current line
+
 set number             " line numbers
 "set relativenumber      " relative number to the current column
-"set list                " end of line/tab chars 
+
 set scrolloff=4         " start scrolling 8 rows above/below the top/bottom
 set sidescrolloff=8     " start scrolling 8 cols to the side fo the screen
 
+"set list                " end of line/tab chars 
+set listchars=eol:¬,extends:…,precedes:…,tab:▸\ 
+
 " statusline 
 "set laststatus=1    " only show status line on multiple windows
-set statusline=%<\ %n:%f\ 
-set statusline+=%m%r%y%=
-set statusline+=%c%V,
-set statusline+=%l\ of\ %L\ 
-set statusline+=(%P)
+"set statusline=%<\ %n:%f\ 
+"set statusline+=%m%r%y%=
+"set statusline+=%c%V,
+"set statusline+=%l\ of\ %L\ 
+"set statusline+=(%P)
 "set title titlestring=vim\ \-\ %t
 
 
