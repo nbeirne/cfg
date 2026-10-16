@@ -1,0 +1,15 @@
+# solid cursor style
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+theme = Challenger Deep
+
+# Stop unselected splits/panes from dimming or fading
+unfocused-split-opacity = 1.0
+
+# Ensure the window title bar and decorations are visible
+window-decoration = true
+
+# make divider more apparent
+split-divider-color = #F0f0f0
