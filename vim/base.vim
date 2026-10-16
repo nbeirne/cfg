@@ -36,7 +36,7 @@ set statusline+=(%P)
 
 
 " == indentation ==
-set smartindent     " smart indentation after a new line (ie, {, },
+"set smartindent     " smart indentation after a new line (ie, {, },
 set tabstop=4       " a tab is four spaces
 set shiftwidth=4    " number of spaces to use for autoindenting
 set expandtab       " insert spaces when tab is pressed
@@ -65,13 +65,13 @@ set completeopt=longest,menuone,preview
 let mapleader = " "
 
 " move by visual line -- don't skip wrapped lines.
-nnoremap j gj
-nnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
 
 " nvim only: next / previous quickfix item (nvim's built-in ]q and [q). 
 " NOTE: replaces default behaviour, where C-n goes up a line and C-p goes down.
-nmap <C-n> ]q
-nmap <C-p> [q
+"nmap <C-n> ]q
+"nmap <C-p> [q
 
 
 " == Quickfix == 
