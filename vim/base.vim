@@ -142,17 +142,6 @@ augroup qf
   "autocmd WinEnter * set nocul
 augroup END
 
-" vim -b : edit binary using xxd-format!
-augroup Binary
-  au!
-  au BufReadPost *.bin if &bin | %!xxd
-  au BufReadPost *.bin set ft=xxd | endif
-  au BufWritePre *.bin if &bin | %!xxd -r
-  au BufWritePre *.bin endif
-  au BufWritePost *.bin if &bin | %!xxd
-  au BufWritePost *.bin set nomod | endif
-augroup END
-
 " custom command for json format
 command Json :%!jq .
 
