@@ -41,8 +41,6 @@ endif
 "set t_8f=[38;2;%lu;%lu;%lum
 
 exec "so " . g:load_path . "/base.vim"
-exec "so " . g:load_path . "/gvim.vim"
-"exec "so " . g:load_path . "/plugin.vim"
 
 if has("nvim")
   set mouse=a

@@ -26,6 +26,10 @@ require("lazy").setup({
     end,
   },
 
+  "NLKNguyen/papercolor-theme",
+  -- "p00f/alabaster.nvim",
+  "agudulin/vim-colors-alabaster",
+
   -- Window navigation with tmux
   "christoomey/vim-tmux-navigator",
 
