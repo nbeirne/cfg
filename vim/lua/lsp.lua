@@ -1,22 +1,20 @@
--- Setup language servers.
-local lspconfig = require('lspconfig')
 
 -- set up pyright and tsserver.
 -- npm install -g typescript-language-server typescript vscode-langservers-extracted @tailwindcss/language-server
-lspconfig.pyright.setup {}
-lspconfig.tsserver.setup {}
-lspconfig.eslint.setup {}
-lspconfig.sourcekit.setup {}
-lspconfig.yamlls.setup {}
-lspconfig.rust_analyzer.setup {
-  -- Server-specific settings. See `:help lspconfig-setup`
+vim.lsp.enable("pyright")
+vim.lsp.enable("tsserver")
+vim.lsp.enable("eslint")
+vim.lsp.enable("sourcekit")
+vim.lsp.enable("yamlls")
+vim.lsp.enable("hls")
+vim.lsp.enable("clangd")
+
+
+vim.lsp.config('rust_analyzer', {
   settings = {
     ['rust-analyzer'] = {},
   },
-}
-lspconfig.hls.setup{}
-require('lspconfig').clangd.setup {}
-
+})
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
