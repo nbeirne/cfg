@@ -16,7 +16,7 @@ set linebreak             " break on words when wrap is on
 set number                " line numbers
 "set relativenumber        " relative number to the current column
 set scrolloff=4           " start scrolling n rows above/below the top/bottom
-set sidescrolloff=8       " start scrolling n cols to the side fo the screen
+set sidescrolloff=8       " start scrolling n cols to the side of the screen
 
 
 " == indentation ==
