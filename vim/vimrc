@@ -6,6 +6,7 @@ let &runtimepath = s:dir . ',' . &runtimepath
 " nvim defaults that Vim lacks. Before base.vim, since `syntax on` would reset its colorscheme.
 filetype plugin indent on
 syntax on
+set history=10000
 set hidden
 set nrformats-=octal
 set autoindent

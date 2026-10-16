@@ -1,17 +1,10 @@
 " == Basic VIM settings ==
-set backspace=indent,eol,start  " allow backspace over everying in insert mode
-set history=1000                " remember 1000 commands and search history
 set fileformats=unix,dos,mac    " be able to read os file formats without issues
-let g:netrw_liststyle=3         " netrw tree list 
-set textwidth=0                 " no auto newline
+let g:netrw_liststyle=3         " netrw tree list
 
 "set autoread                    " When a file changes out of vim, read it again 
 
 " == visual settings ==
-set noshowmatch                 " don't jump to matching paren
-set showmode                    " shows the current mode
-set showcmd                     " Shows the input from an incomplete command
-
 set nowrap                      " do not wrap text in editor
 set linebreak                   " break on words when wrap is on
 set listchars=eol:¬,extends:…,precedes:…,tab:▸\ 
@@ -48,7 +41,6 @@ endif
 
 
 " == backup and extra files ==
-set nobackup        " don't make backup files
 set nowritebackup   " push saves to the original file, as opposed to saving 
 " to a new file then renaming it.
 " set noswapfile     " removes the 'swap' file (*.*.swp) 
@@ -63,7 +55,6 @@ set sidescrolloff=8     " start scrolling 8 cols to the side fo the screen
 " == status and title ==
 "set laststatus=1    " only show status line on multiple windows
 
-set wildmenu        " allow status line completions (files, commands, etc)
 set wildignorecase  " ignore case in tab complete
 
 "set wildignore+=**/node_modules/*
