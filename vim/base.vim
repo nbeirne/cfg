@@ -49,7 +49,7 @@ endif
 
 augroup qf
   au!
-  autocmd FileType qf setlocal nobuflisted " take quickfix buffer out of the buflist (:bl and <Space>fb)
+  autocmd FileType qf setlocal nobuflisted " take quickfix buffer out of the buflist (:ls and <Space>fb)
 augroup END
 
 " gq formats json with jq (gggqG for the whole file)

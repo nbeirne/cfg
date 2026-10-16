@@ -1,5 +1,4 @@
 
--- npm install -g typescript-language-server typescript vscode-langservers-extracted @tailwindcss/language-server
 vim.lsp.enable("pyright")
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("eslint")
