@@ -38,7 +38,6 @@ set ignorecase            " ignore case in / search
 set smartcase             " if you / search with a capital, don't ignore case
 
 
-
 " == search tools ==
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --smart-case
@@ -53,12 +52,6 @@ endif
 augroup qf
   autocmd FileType qf setlocal nobuflisted " take quickfix buffer out of the buflist (:bl and <Space>fb)
 augroup END
-
-aug QFClose
-  " auto close quickfix window if it is the last window
-  au!
-  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
-aug END
 
 " gq formats json with jq (gggqG for the whole file)
 augroup json
