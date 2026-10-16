@@ -122,8 +122,11 @@ augroup qf
   "autocmd WinEnter * set nocul
 augroup END
 
-" custom command for json format
-command Json :%!jq .
+" gq formats json with jq (gggqG for the whole file)
+augroup json
+  au!
+  au FileType json setlocal formatprg=jq\ .
+augroup END
 
 "set modelines=1
 
