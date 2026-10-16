@@ -78,9 +78,9 @@ let mapleader = " "
 
 augroup qf
   " UP will go to the previous result, DOWN will go to the next result
-  autocmd FileType qf set nobuflisted
-  autocmd FileType qf set norelativenumber
-  autocmd FileType qf set wrap
+  autocmd FileType qf setlocal nobuflisted
+  autocmd FileType qf setlocal norelativenumber
+  autocmd FileType qf setlocal wrap
   "autocmd WinLeave * set cul
   "autocmd WinEnter * set nocul
 augroup END
