@@ -40,10 +40,10 @@ set statusline+=(%P)
 set tabstop=4       " a tab is four spaces
 set shiftwidth=4    " number of spaces to use for autoindenting
 set expandtab       " insert spaces when tab is pressed
-set shiftround      " use multiple of Shiftwidth when indenting with '<' and '>'
+"set shiftround      " use multiple of Shiftwidth when indenting with '<' and '>'
 
 " == search and quickfix ==
-set path=.,,,**     " path for :find
+set path=.,,,**     " path for :find, gf, and other file search ops
 set ignorecase      " ignore case
 set smartcase       " if you search with a capital, don't ignore case
 
@@ -57,7 +57,7 @@ endif
 
 " completions behaviour
 set wildignorecase  " ignore case in tab complete in the command line (:e rea<tab> -> :e README)
-set completeopt=longest,menuone,preview 
+"set completeopt=longest,menuone,preview 
 
 
 " == Keybindings ==
