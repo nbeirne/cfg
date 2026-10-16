@@ -113,6 +113,11 @@ nnoremap \ @@
 " bs goes to last jump location
 nmap <BS> <C-^>
 
+" nvim only: next / previous quickfix item (nvim's built-in ]q and [q). 
+" NOTE: replaces default behaviour, where C-n goes up a line and C-p goes down.
+nmap <C-n> ]q
+nmap <C-p> [q
+
 " Copy and Paste
 " These can potentially be overriden by platform specific settings
 imap <C-v> <ESC>"+pa
@@ -162,9 +167,6 @@ augroup qf
   autocmd FileType qf set nobuflisted
   autocmd FileType qf set norelativenumber
   autocmd FileType qf set wrap
-  autocmd FileType qf nmap <buffer> <UP> <UP><CR><C-w><C-p> 
-  autocmd FileType qf nmap <buffer> <DOWN> <DOWN><CR><C-w><C-p> 
-  autocmd FileType qf nmap <buffer> q :close<CR>
   "autocmd WinLeave * set cul
   "autocmd WinEnter * set nocul
 augroup END

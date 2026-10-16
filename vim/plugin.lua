@@ -43,7 +43,6 @@ require("lazy").setup({
     opts = {}, -- call setup
   },
 
-  "yssl/QFEnter",
 
   { 
     "rgarver/Kwbd.vim",
