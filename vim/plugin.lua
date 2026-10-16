@@ -131,9 +131,6 @@ require("lazy").setup({
   },
 
   -- language plugins
-  "sheerun/vim-polyglot",          -- syntax + indentation for a lot of languages.
-  "editorconfig/editorconfig-vim", -- project editor configurations
-
   { 
     "neovim/nvim-lspconfig",
     config = function()
