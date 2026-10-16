@@ -1,20 +1,14 @@
 
--- set up pyright and tsserver.
 -- npm install -g typescript-language-server typescript vscode-langservers-extracted @tailwindcss/language-server
 vim.lsp.enable("pyright")
-vim.lsp.enable("tsserver")
+vim.lsp.enable("ts_ls")
 vim.lsp.enable("eslint")
 vim.lsp.enable("sourcekit")
 vim.lsp.enable("yamlls")
 vim.lsp.enable("hls")
 vim.lsp.enable("clangd")
+vim.lsp.enable("rust_analyzer")
 
-
-vim.lsp.config('rust_analyzer', {
-  settings = {
-    ['rust-analyzer'] = {},
-  },
-})
 
 -- nvim's built-in LSP defaults (:help lsp-defaults).
 --   <C-]>        definition (via tagfunc; <C-w>] in a split)
