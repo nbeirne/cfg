@@ -6,13 +6,22 @@
 #   tmuxa [new]       - connect to new session
 
 #tmuxa() {
-  last="${!#}"
+  session_name="${!#}"
   if [ $# -eq 0 ]
   then
     #echo "tmux new-session -A"
-    tmux attach-session || tmuxinator dev
+    if command -v tmuxinator
+    then
+      tmux attach-session || tmuxinator dev
+    else
+      tmux attach-session || tmux new-session 
+    fi
   else 
-    #echo "tmux new-session -A -s $last"
-    tmux new-session -A -s $last
+    if command -v tmuxinator
+    then
+      tmuxinator $session_name
+    else
+      tmux new-session -A -s $session_name
+    fi
   fi
 #}
