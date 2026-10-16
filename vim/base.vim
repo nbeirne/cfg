@@ -55,9 +55,8 @@ elseif executable('ag')
   set grepformat=%f:%l:%c:%m
 endif
 
-set wildignorecase  " ignore case in tab complete in teh command line (:e rea<tab> -> :e README)
-
-" Completion fixes 
+" completions behaviour
+set wildignorecase  " ignore case in tab complete in the command line (:e rea<tab> -> :e README)
 set completeopt=longest,menuone,preview 
 
 
@@ -97,7 +96,6 @@ augroup json
   au!
   au FileType json setlocal formatprg=jq\ .
 augroup END
-
 
 "set modelines=1
 
