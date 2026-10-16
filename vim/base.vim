@@ -125,35 +125,6 @@ vmap <C-v> c<ESC>"+p
 vmap <C-c> "+yi
 vmap <C-x> "+c
 
-" Windows
-"nmap <Leader>w <C-w>
-
-" map Control-d, Control-\, and Control-- to manage splits
-"nmap <C-w>\ :vsplit<CR>
-"nmap <C-w>- :split<CR>
-"nmap <C-w>d :close<CR>
-
-" window bindings Alt-Shift-hjkl will resize windows
-"nmap <M-S-h> <C-w><
-"nmap <M-S-l> <C-w>>
-"nmap <M-S-j> <C-w>+
-"nmap <M-S-k> <C-w>-
-
-" Map Control-hjkl to move between windows
-"nmap <BS> <C-w>h
-"set <C-h>=[104;5u
-"nmap <C-h> <C-w>h
-"nmap <C-j> <C-w>j
-"nmap <C-k> <C-w>k
-"nmap <C-l> <C-w>l
-
-
-"nmap ]b :bn<CR>
-"nmap [b :bp<CR>
-"nmap [B :bfirst<CR>
-"nmap ]B :blast<CR>
-"
-
 " maps control-/ to clear the current search
 if maparg('<C-_>', 'n') ==# ''
   nnoremap <silent> <C-_> :nohlsearch<CR><C-_>
