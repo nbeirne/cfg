@@ -79,19 +79,9 @@ set completeopt=longest,menuone,preview
 " setting leader key
 let mapleader = " "
 
-" preserve page up and page down
-imap <C-d> <C-o><C-d>
-imap <C-u> <C-o><C-u>
-
 " move by visual line -- don't skip wrapped lines.
 nnoremap j gj
 nnoremap k gk
-
-" bind \ to repeat last macro (@@)
-nnoremap \ @@
-
-" bs goes to last jump location
-nmap <BS> <C-^>
 
 " nvim only: next / previous quickfix item (nvim's built-in ]q and [q). 
 " NOTE: replaces default behaviour, where C-n goes up a line and C-p goes down.
@@ -104,13 +94,6 @@ imap <C-v> <ESC>"+pa
 vmap <C-v> c<ESC>"+p
 vmap <C-c> "+yi
 vmap <C-x> "+c
-
-" maps control-/ to clear the current search
-if maparg('<C-_>', 'n') ==# ''
-  nnoremap <silent> <C-_> :nohlsearch<CR><C-_>
-endif
-" }}}
-
 
 " == Quickfix == 
 augroup qf
