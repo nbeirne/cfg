@@ -26,23 +26,8 @@ require("lazy").setup({
     end,
   },
 
-  "NLKNguyen/papercolor-theme",
-  -- "p00f/alabaster.nvim",
-  "agudulin/vim-colors-alabaster",
-
   -- Window navigation with tmux
   "christoomey/vim-tmux-navigator",
-
-  { 
-    "declancm/maximize.nvim", 
-    keys = { 
-      "<Leader>z",
-      { "<C-w>=", "<Cmd>lua require('maximize').toggle()<CR>" },
-      { "<Leader>=", "<Cmd>lua require('maximize').toggle()<CR>" },
-    },
-    opts = {}, -- call setup
-  },
-
 
   { 
     "rgarver/Kwbd.vim",
@@ -83,22 +68,9 @@ require("lazy").setup({
     end,
   },
 
-  { -- manage tags using m and '
-    "kshenoy/vim-signature",
-    --keys = {
-    --  "mx",
-    --  "dmx",
-    --  "m,",
-    --  "m.",
-    --  "m-",
-    --  "m<Space>",
-    --  "m/",
-    --}
-  },
-
   --- IDE like features.
   'tpope/vim-fugitive', -- git 
-  'tpope/vim-surround', 
+  'tpope/vim-surround', -- delete and change within pairs. noun: s<Q> (cs'")
 
 
   {
@@ -136,11 +108,6 @@ require("lazy").setup({
     config = function()
       require("lsp")
     end,
-  },
-
-  {
-    "prettier/vim-prettier",
-    ft = { "javascript", "typescript", "css", "less", "scss", "json", "graphql", "markdown", "vue", "svelte", "yaml", "html" },
   },
 
 })
